@@ -49,6 +49,9 @@ sed -i s+LABEL=swap+/dev/mapper/swap+ /mnt/etc/fstab
 
 echo "cryptswap        /dev/disk/by-partlabel/cryptswap        /dev/urandom        swap,offset=2048,cipher=aes-xts-plain64,size=256" >> /mnt/etc/crypttab
 
+# Ponemos aquí la uuid de l aparticion la usaremos después
+lsblk -fs | grep system | awk '{ print $4 }' > /mnt/tmp/uuid_de_system 
+
 echo "Boot into new system"
 echo "pts/0" /mnt/etc/securetty
 systemd-nspawn -bD /mnt
