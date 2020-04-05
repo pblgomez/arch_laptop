@@ -7,7 +7,7 @@ sgdisk --clear \
          --new=3:0:0       --typecode=3:8300 --change-name=3:cryptsystem \
            $DRIVE
 
-echo "Format EFI Partition"
+echo "FORMAT EFI PARTITION"
 
 mkfs.fat -F32 -n EFI /dev/disk/by-partlabel/EFI
 
@@ -21,3 +21,24 @@ echo "Bring Up Encrypted Swap"
 cryptsetup open --type plain --key-file /dev/urandom /dev/disk/by-partlabel/cryptswap swap
 mkswap -L swap /dev/mapper/swap
 swapon -L swap
+
+echo "Create and mount BTRFS subvolumes"
+mkfs.btrfs --force --label system /dev/mapper/system
+o=defaults,x-mount.mkdir
+o_btrfs=$o,compress=lzo,ssd,noatime
+mount -t btrfs LABEL=system /mnt
+
+btrfs subvolume create /mnt/root
+btrfs subvolume create /mnt/home
+btrfs subvolume create /mnt/snapshots
+umount -R /mnt
+mount -t btrfs -o subvol=root,$o_btrfs LABEL=system /mnt
+mount -t btrfs -o subvol=home,$o_btrfs LABEL=system /mnt/home
+mount -t btrfs -o subvol=snapshots,$o_btrfs LABEL=system /mnt/.snapshots
+
+echo "Mount EFI partition"
+mkdir /mnt/boot
+mount LABEL=EFI /mnt/boot
+
+echo "Install base package group"
+pacstrap /mnt base
