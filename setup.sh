@@ -42,3 +42,9 @@ mount LABEL=EFI /mnt/boot
 
 echo "Install base package group"
 pacstrap /mnt base
+
+echo "fstab Generation and Modification"
+genfstab -L -p /mnt >> /mnt/etc/fstab
+sed -i s+LABEL=swap+/dev/mapper/swap+ /mnt/etc/fstab
+
+echo "cryptswap        /dev/disk/by-partlabel/cryptswap        /dev/urandom        swap,offset=2048,cipher=aes-xts-plain64,size=256" >> /etc/mnt/crypttab
