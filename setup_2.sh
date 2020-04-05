@@ -24,3 +24,9 @@ refind-install
 cp /boot/EFI/refind/refind.conf /boot/EFI/refind/refind.conf.bak
 echo "use_graphics_for windows" >> /boot/EFI/refind/refind.conf
 echo "also_scan_dirs   +,@/             # Search for boot loaders in the specified directory" >> /boot/EFI/refind/refind.conf
+
+
+echo '"Boot with standard options"  "rd.luks.name=*FILL IN UUID FROM PARTITION*=cryptsystem root=UUID=*UUID FROM encrypted root subvolume* rootflags=subvol=root initrd=/intel-ucode.img initrd=/initramfs-linux.img"' >> /boot/refind_linux.conf
+
+echo "CUIDADO MIRA EL ULTIMO PASO"
+echo "despues reboot"
