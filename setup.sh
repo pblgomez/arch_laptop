@@ -16,7 +16,7 @@ echo "FORMAT EFI PARTITION"
 mkfs.fat -F32 -n EFI /dev/disk/by-partlabel/EFI
 
 echo "Encrypt System Partition"
-cryptsetup luksFormat --align-payload=8192 -s 256 -c aes-xts-plain64 /dev/disk/by-partlabel/cryptsystem
+cryptsetup luksFormat --type luks1 --align-payload=8192 -s 256 -c aes-xts-plain64 /dev/disk/by-partlabel/cryptsystem
 cryptsetup open /dev/disk/by-partlabel/cryptsystem system
 
 echo "Bring Up Encrypted Swap"

@@ -2,8 +2,21 @@
 
 Based on (https://wiki.archlinux.org/index.php/User:Altercation/Bullet_Proof_Arch_Install#Installation_of_Base_Arch_Linux_System)[This article]
 
-Boot the arch install media
+1. Boot the arch install media
+    ```
+    pacman -Sy git
+    git clone http://github.com/pblgomez/arch_laptop.git
+    cd arch_laptop
+    ./setup.sh
+    ```
 
-```
-pacman -Sy git
-git clone http://github.com/pblgomez/arch_laptop.git
+1. Inside the systemd env
+    ```
+    pacman -Sy git
+    git clone http://github.com/pblgomez/arch_laptop.git
+    cd arch_laptop
+    ./setup_2.sh
+    ```
+
+1. 
+    

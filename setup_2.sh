@@ -6,7 +6,7 @@ hostnamectl set-hostname 'pbl-miair13'
 echo "127.0.1.1	pbl-miair13.localdomain	pbl-miair13" >> /etc/hosts
 
 echo "Base Package Installation"
-pacman -Syu --needed --noconfirm linux-zen base-devel btrfs-progs iw gptfdisk zsh neovim terminus-font intel-ucode grub grub-btrfs
+pacman -Syu --needed --noconfirm linux-zen base-devel btrfs-progs iw gptfdisk zsh neovim terminus-font intel-ucode grub grub-btrfs efibootmgr
 
 echo "Initramfs"
 cp /etc/mkinitcpio.conf /etc/mkinitcpio.conf.orig
@@ -17,6 +17,7 @@ echo "KEYMAP=us-acentos" >> /etc/vconsole.conf
 mkinitcpio -p linux-zen
 
 echo "Bootloader"
+echo "GRUB_ENABLE_CRYPTODISK=y" >> /etc/default/grub
 btrfs_uuid=$(cat /root/uuid_de_crypto)
 sed -i 's/GRUB_CMDLINE_LINUX=""/GRUB_CMDLINE_LINUX="cryptdevice=UUID='$btrfs_uuid':system"/' /etc/default/grub
 
