@@ -53,5 +53,5 @@ echo "cryptswap        /dev/disk/by-partlabel/cryptswap        /dev/urandom     
 lsblk -fs | grep system | awk '{ print $4 }' > /mnt/root/uuid_de_system 
 
 echo "Boot into new system"
-echo "pts/0" /mnt/etc/securetty
+echo "\npts/"{0..9} >> /mnt/etc/securetty
 systemd-nspawn -bD /mnt
