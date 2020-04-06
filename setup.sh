@@ -1,3 +1,6 @@
+#!/usr/bin/env bash
+set -e
+
 lsblk -o +LABEL,PARTLABEL,UUID,PARTUUID
 DRIVE=/dev/sda
 sgdisk --zap-all $DRIVE
@@ -6,18 +9,17 @@ sgdisk --clear \
          --new=2:0:+8GiB   --typecode=2:8200 --change-name=2:cryptswap \
          --new=3:0:0       --typecode=3:8300 --change-name=3:cryptsystem \
            $DRIVE
+sleep 5
+
 
 echo "FORMAT EFI PARTITION"
-
 mkfs.fat -F32 -n EFI /dev/disk/by-partlabel/EFI
 
 echo "Encrypt System Partition"
-
 cryptsetup luksFormat --align-payload=8192 -s 256 -c aes-xts-plain64 /dev/disk/by-partlabel/cryptsystem
 cryptsetup open /dev/disk/by-partlabel/cryptsystem system
 
 echo "Bring Up Encrypted Swap"
-
 cryptsetup open --type plain --key-file /dev/urandom /dev/disk/by-partlabel/cryptswap swap
 mkswap -L swap /dev/mapper/swap
 swapon -L swap
@@ -37,8 +39,8 @@ mount -t btrfs -o subvol=home,$o_btrfs LABEL=system /mnt/home
 mount -t btrfs -o subvol=snapshots,$o_btrfs LABEL=system /mnt/.snapshots
 
 echo "Mount EFI partition"
-mkdir /mnt/boot
-mount LABEL=EFI /mnt/boot
+mkdir /mnt/efi
+mount LABEL=EFI /mnt/efi
 
 echo "Install base package group"
 pacstrap /mnt base
