@@ -57,5 +57,8 @@ lsblk -fs | grep crypto | awk '{print $4}' > /mnt/root/uuid_de_crypto
 #lsblk -fs | grep system | awk '{ print $4 }' > /mnt/root/uuid_de_system 
 
 echo "Boot into new system"
-echo '\npts/'{0..9} >> /mnt/etc/securetty
+for i in {0..9}
+do
+  echo 'pts/'$i >> /mnt/etc/securetty
+done
 systemd-nspawn -bD /mnt
