@@ -11,15 +11,14 @@ pacman -Syu --needed --noconfirm linux-zen base-devel btrfs-progs iw gptfdisk zs
 echo "Initramfs"
 cp /etc/mkinitcpio.conf /etc/mkinitcpio.conf.orig
 
-sed -i 's/^HOOKS=.*/HOOKS=(base systemd sd-vconsole modconf keyboard block filesystems btrfs sd-encrypt fsck)
-/' /etc/mkinitcpio.conf
+sed -i 's/^HOOKS=.*/HOOKS=(base systemd sd-vconsole modconf keyboard block filesystems btrfs sd-encrypt fsck)/' /etc/mkinitcpio.conf
 
 echo "KEYMAP=us-acentos" >> /etc/vconsole.conf
 mkinitcpio -p linux-zen
 
 echo "Bootloader"
 btrfs_uuid=$(cat /root/uuid_de_crypto)
-sed -i 's/GRUB_CMDLINE_LINUX=""/GRUB_CMDLINE_LINUX="cryptdevice=UUID'$btrfs_uuid':cryptsystem"
+sed -i 's/GRUB_CMDLINE_LINUX=""/GRUB_CMDLINE_LINUX="cryptdevice=UUID='$btrfs_uuid':system"/' /etc/default/grub
 
 
 
