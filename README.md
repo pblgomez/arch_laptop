@@ -6,17 +6,16 @@ Based on (https://wiki.archlinux.org/index.php/User:Altercation/Bullet_Proof_Arc
     ```
     pacman -Sy git
     git clone http://github.com/pblgomez/arch_laptop.git
-    cd arch_laptop
-    ./setup.sh
+    ./arch_laptop/setup.sh
     ```
 
 1. Inside the systemd env
     ```
-    pacman -Sy git
-    git clone http://github.com/pblgomez/arch_laptop.git
-    cd arch_laptop
-    ./setup_2.sh
+    ./arch_laptop/setup_2.sh
     ```
 
-1. 
-    
+1. Bootloader
+    ```
+    arch-chroot /mnt
+    /root/arch_laptop/setup_3.sh
+    ```

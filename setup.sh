@@ -43,7 +43,7 @@ mkdir /mnt/efi
 mount LABEL=EFI /mnt/efi
 
 echo "Install base package group"
-pacstrap /mnt base
+pacstrap /mnt base git
 
 echo "fstab Generation and Modification"
 genfstab -L -p /mnt >> /mnt/etc/fstab
@@ -61,4 +61,5 @@ for i in {0..9}
 do
   echo 'pts/'$i >> /mnt/etc/securetty
 done
+cp -Rvu /root/arch_laptop /mnt/root/.
 systemd-nspawn -bD /mnt
