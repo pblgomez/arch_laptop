@@ -106,3 +106,9 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 cp $DIR/step2.sh /mnt/arch-root/root/.
 cp $DIR/variables.sh /mnt/arch-root/root/.
 arch-chroot /mnt/arch-root
+
+echo "############################################################"
+echo "# Finished step2, now shutdown"
+echo "############################################################"
+sleep 10
+shutdown now

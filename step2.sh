@@ -74,3 +74,4 @@ echo "# Finished. Now type:"
 echo "# exit"
 echo "# shutdown now"
 echo "############################################################"
+exit
