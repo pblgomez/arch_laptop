@@ -68,7 +68,7 @@ echo "# crypttab"
 echo "############################################################"
 echo "$root_part_name    UUID=$uuid_crypto    none                    luks,timeout=180" >> /etc/crypttab
 
-
+rm -rfv $DIR/step2.sh $DIR/variables.sh
 echo "############################################################"
 echo "# Finished. Now type:"
 echo "# exit"
