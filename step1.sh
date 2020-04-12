@@ -59,6 +59,8 @@ echo "############################################################"
 echo "# Formatting partitions"
 echo "############################################################"
 mkfs.fat -F32 -n EFI /dev/disk/by-partlabel/EFI
+# parted set 1 boot on
+# parted set 1 esp on
 mkfs.btrfs --force --label archroot /dev/mapper/$root_vol_name
 
 echo "############################################################"
