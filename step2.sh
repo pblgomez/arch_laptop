@@ -46,9 +46,9 @@ if [ $bootloader = "grub" ]; then
     echo "# GRUB"
     echo "############################################################"
     grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB --recheck
-    grub-mkconfig -o /boot/grub/grub.cfg
     sed -i '/^#GRUB_ENABLE_CRYPTO.*/s/^#//' /etc/default/grub
-    sed -i 's+GRUB_CMDLINE_LINUX=.*+GRUB_CMDLINE_LINUX="cryptdevice=UUID='${uuid_crypto}':'${name_system}' root=/dev/mapper/'$root_part_name'"+' /etc/default/grub
+    sed -i 's+GRUB_CMDLINE_LINUX=.*+GRUB_CMDLINE_LINUX="cryptdevice=UUID='${uuid_crypto}':'${root_part_name}' root=/dev/mapper/'$root_part_name'"+' /etc/default/grub
+    grub-mkconfig -o /boot/grub/grub.cfg
 elif [ $bootloader = "refind" ]; then
     echo "############################################################"
     echo "# rEFInd"
