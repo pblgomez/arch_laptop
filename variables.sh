@@ -8,7 +8,7 @@ distro="arch"
 root_vol_name="system"                      # nombre de la particion root descifrada"
 swap=y                                      # yes(y) or no(n)
 name_swap="cryptswap"                       # nombre de la particion de swap cifrada
-name_system="cryptosystem"                  # nombre de la particion root cifrada
+name_system="cryptsystem"                  # nombre de la particion root cifrada
 kernel="linux-zen"
 encryption="--type luks1 --align-payload=8192 -s 256 -c aes-xts-plain64" # you can leave this blank
 locale="en_US"
