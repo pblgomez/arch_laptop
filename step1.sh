@@ -25,15 +25,6 @@ else
            $DRIVE
 fi
 
-echo "############################################################"
-echo "# Initate pacman keyring and selecting mirrors"
-echo "############################################################"
-pacman-key --init
-pacman-key --populate archlinux
-pacman-key --refresh-keys
-pacman -Sy --noconfirm --needed reflector
-reflector --latest 50 --number 20 --sort score --save /etc/pacman.d/mirrorlist
-
 if [ $swap = y ]; then
     echo "############################################################"
     echo "# Bring Up Encrypted Swap"
@@ -81,6 +72,15 @@ mount -o subvol=@${distro},$o_btrfs /dev/mapper/$root_vol_name /mnt/
 mkdir /mnt/boot
 mount -o subvol=@${distro}_home,$o_btrfs /dev/mapper/$root_vol_name /mnt/home
 mount /dev/disk/by-partlabel/EFI /mnt/boot
+
+echo "############################################################"
+echo "# Initate pacman keyring and selecting mirrors"
+echo "############################################################"
+pacman-key --init
+pacman-key --populate archlinux
+pacman-key --refresh-keys
+pacman -Sy --noconfirm --needed reflector
+reflector --latest 50 --number 20 --sort score --save /etc/pacman.d/mirrorlist
 
 echo "############################################################"
 echo "# Installing base system"
