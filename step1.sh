@@ -15,7 +15,7 @@ sgdisk --zap-all $DRIVE
 if [ $swap = y ]; then
     sgdisk --clear \
          --new=1:0:+550MiB --typecode=1:ef00 --change-name=1:EFI \
-         --new=2:0:+8GiB   --typecode=2:8200 --change-name=2:$name_swap \
+         --new=2:0:+${swap_size}GiB   --typecode=2:8200 --change-name=2:$name_swap \
          --new=3:0:0       --typecode=3:8300 --change-name=3:$name_system \
            $DRIVE
 else
@@ -38,6 +38,7 @@ if [ $swap = y ]; then
     echo "############################################################"
     echo "# Bring Up Encrypted Swap"
     echo "############################################################"
+    swapoff -a
     cryptsetup open --type plain --key-file /dev/urandom /dev/disk/by-partlabel/$name_swap swap
     mkswap -L swap /dev/mapper/swap
     swapon -L swap
