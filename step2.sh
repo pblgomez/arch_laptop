@@ -4,10 +4,10 @@ set -e
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 source $DIR/variables.sh
 
-echo "############################################################"
-echo "# Password for root:"
-echo "############################################################"
-passwd
+# echo "############################################################"
+# echo "# Password for root:"
+# echo "############################################################"
+# passwd
 
 echo "############################################################"
 echo "# Create user"
@@ -16,6 +16,10 @@ read -p "Enter username: " username
 useradd -G sys,network,scanner,power,rfkill,users,video,uucp,storage,optical,lp,audio,wheel -s $(which zsh) -m $username
 echo "Enter password:"
 passwd $username
+# Give sudoers permission
+sed -i 's/# %w.*) ALL$/%wheel ALL=(ALL) ALL/g' /etc/sudoers
+# Disable root permission
+sed -i '/^root.*/ s/:x:/: :/' /etc/passwd
 
 echo "############################################################"
 echo "# Time"
