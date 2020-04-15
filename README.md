@@ -6,7 +6,9 @@ Based on (https://wiki.archlinux.org/index.php/User:Altercation/Bullet_Proof_Arc
     ```
     pacman -Sy git
     git clone http://github.com/pblgomez/arch_laptop.git
-    change all the variables on variables.sh
+    ```
+1. Change all the variables on variables.sh
+    ```
     ./arch_laptop/step1.sh
     ```
 

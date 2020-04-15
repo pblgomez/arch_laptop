@@ -85,7 +85,8 @@ reflector --latest 50 --number 20 --sort score --save /etc/pacman.d/mirrorlist
 echo "############################################################"
 echo "# Installing base system"
 echo "############################################################"
-pacstrap /mnt base btrfs-progs base-devel intel-ucode $kernel \
+pacstrap /mnt base btrfs-progs base-devel intel-ucode \
+    $kernel linux-firmware intel-ucode \
     efibootmgr grub \
     zsh \
     dhcpcd wpa_supplicant netctl networkmanager

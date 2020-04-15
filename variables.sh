@@ -16,7 +16,7 @@ swap=y                                                                    # yes(
 swap_size="8"                                                             # Swap size in GB
 name_swap="cryptswap"                                                     # nombre de la particion de swap cifrada
 
-kernel="linux-zen"
+kernel="linux-zen"                                                        # linux, linux-zen, linux-lts
 
 locale="en_US"
 
