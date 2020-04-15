@@ -10,10 +10,19 @@ echo "############################################################"
 passwd
 
 echo "############################################################"
+echo "# Create user"
+echo "############################################################"
+echo "Enter username:"
+read -p username
+useradd -G sys,network,scanner,power,rfkill,users,video,uucp,storage,optical,lp,audio,wheel -m $username
+echo "Enter password:"
+passwd $username
+
+echo "############################################################"
 echo "# Time"
 echo "############################################################"
 ln -sf /usr/share/zoneinfo/$TZ /etc/localtime
-hwclock --systohc
+hwclock --systohc --utc
 
 echo "############################################################"
 echo "# Locales"
@@ -39,16 +48,16 @@ mkinitcpio -p $kernel
 echo "############################################################"
 echo "# Bootloader"
 echo "############################################################"
-uuid_crypto=$(lsblk -fs | grep crypt | awk '{print $4}')
-root_part_name=$(df | grep '/$' | awk '{print $1}' | sed 's/.*\///' )
+# uuid_crypto=$(lsblk -fs | grep crypt | awk '{print $4}')
+# root_part_name=$(df | grep '/$' | awk '{print $1}' | sed 's/.*\///' )
 if [ $bootloader = "grub" ]; then
     echo "############################################################"
     echo "# GRUB"
     echo "############################################################"
-    grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB --recheck
     sed -i '/^#GRUB_ENABLE_CRYPTO.*/s/^#//' /etc/default/grub
-    sed -i 's+GRUB_CMDLINE_LINUX=.*+GRUB_CMDLINE_LINUX="cryptdevice=UUID='${uuid_crypto}':'${root_part_name}' root=/dev/mapper/'$root_part_name'"+' /etc/default/grub
-    grub-mkconfig -o /boot/grub/grub.cfg
+    sed -i 's+GRUB_CMDLINE_LINUX=.*+GRUB_CMDLINE_LINUX="cryptdevice=/dev/disk/by-partlabel/'$name_system':'${root_vol_name}' root=/dev/mapper/'$root_vol_name'"+' /etc/default/grub
+    grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB --recheck
+    grub-mkconfig --output /boot/grub/grub.cfg
 elif [ $bootloader = "refind" ]; then
     echo "############################################################"
     echo "# rEFInd"
@@ -57,8 +66,6 @@ elif [ $bootloader = "refind" ]; then
     cd /boot/EFI
     mkdir boot
     cp refind/refind_x64.efi boot/bootx64.efi
-    uuid_crypto=$(lsblk -fs | grep crypt | awk '{print $4}')
-    root_part_name=$(df | grep '/$' | awk '{print $1}' | sed 's/.*\///' )
     cp /boot/EFI/refind/refind.conf /boot/EFI/refind/refind.conf.orig
     echo '
     menuentry "Arch Linux" {
@@ -67,7 +74,7 @@ elif [ $bootloader = "refind" ]; then
         loader   /vmlinuz-'$kernel'
         initrd   /intel-ucode.img
         initrd   /initramfs-'$kernel'.img
-        options  "cryptdevice=UUID='$uuid_crypto':'$root_part_name' root=/dev/mapper/'$root_part_name' rootflags=subvol=root rw add_efi_memmap"
+        options  "cryptdevice=/dev/disk/by-partlabel/'$name_system':'$root_vol_name' root=/dev/mapper/'$root_vol_name' rootflags=subvol=root rw add_efi_memmap"
         submenuentry "Boot to terminal" {
             add_options "systemd.unit=multi-user.target"
         }
@@ -81,7 +88,7 @@ fi
 echo "############################################################"
 echo "# crypttab"
 echo "############################################################"
-echo "$root_part_name    UUID=$uuid_crypto    none                    luks,timeout=180" >> /etc/crypttab
+echo "$root_vol_name    /dev/disk/by-partlabel/$name_system    none                    luks,timeout=180" >> /etc/crypttab
 
 rm -rfv $DIR/step2.sh $DIR/variables.sh
 echo "############################################################"
