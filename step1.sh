@@ -61,6 +61,7 @@ echo "############################################################"
 echo "# Creating subvolumes"
 echo "############################################################"
 btrfs subvolume create /mnt/@${distro}
+btrfs subvolume create /mnt/@${distro}_var
 btrfs subvolume create /mnt/@${distro}_home
 umount /mnt
 
@@ -69,6 +70,7 @@ echo "# Mounting the subvolumes + boot"
 echo "############################################################"
 o_btrfs=defaults,x-mount.mkdir,compress=lzo,ssd,noatime
 mount -o subvol=@${distro},$o_btrfs /dev/mapper/$root_vol_name /mnt/
+mount -o subvol=@${distro}_var,$o_btrfs /dev/mapper/$root_vol_name /mnt/var
 mkdir /mnt/boot
 mount -o subvol=@${distro}_home,$o_btrfs /dev/mapper/$root_vol_name /mnt/home
 mount /dev/disk/by-partlabel/EFI /mnt/boot

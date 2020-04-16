@@ -33,6 +33,7 @@ echo "############################################################"
 sed -i "/#${locale}.UTF-8/s/^#//g" /etc/locale.gen
 echo "LANG=${locale}.UTF-8" > /etc/locale.conf
 echo "LC_COLLATE=C" >> /etc/locale.conf
+echo "LC_CTYPE=${locale}.UTF-8" >> /etc/locale.conf
 locale-gen
 
 echo "############################################################"
