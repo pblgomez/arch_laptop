@@ -12,5 +12,5 @@ export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 
 # Start graphical server on tty1 if not already running.
 [ "$(tty)" = "/dev/tty1" ] && ! pgrep -x Xorg >/dev/null && exec startx
-  ' | sudo tee -a /etc/zsh/zshenv
+  ' | tee -a /etc/zsh/zshenv
 fi

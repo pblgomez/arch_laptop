@@ -16,3 +16,6 @@ Based on (https://wiki.archlinux.org/index.php/User:Altercation/Bullet_Proof_Arc
     ```
     /root/step2.sh
     ```
+3. There's some scripts (that you should check first!) on /tmp/var/post
+    ```
+    /tmp/var/post/0000.

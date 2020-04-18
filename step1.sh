@@ -90,8 +90,8 @@ echo "############################################################"
 pacstrap /mnt base btrfs-progs base-devel intel-ucode \
     $kernel linux-firmware intel-ucode \
     efibootmgr grub grub-btrfs \
-    zsh \
-    dhcpcd wpa_supplicant netctl networkmanager
+    dhcpcd wpa_supplicant networkmanager \
+    zsh neovim
 
 echo "############################################################"
 echo "# Generating fstab and chroot to new arch system"
@@ -109,6 +109,7 @@ echo "############################################################"
 cp $DIR/step2.sh /mnt/root/.
 cp $DIR/variables.sh /mnt/root/.
 cp -r $DIR/post /mnt/var/tmp/.
+chmod a+rwx -R /mnt/var/tmp/post
 arch-chroot /mnt
 
 echo "############################################################"
