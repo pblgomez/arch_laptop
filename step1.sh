@@ -28,12 +28,12 @@ else
          --new=2:0:0       --typecode=2:8300 --change-name=2:$name_system \
            $DRIVE
 fi
+sleep 3
 
 if [ $swap = y ]; then
     echo "############################################################"
     echo "# Bring Up Encrypted Swap"
     echo "############################################################"
-    swapoff -a
     cryptsetup open --type plain --key-file /dev/urandom /dev/disk/by-partlabel/$name_swap swap
     mkswap -L swap /dev/mapper/swap
     swapon -L swap
