@@ -11,6 +11,8 @@ source $DIR/variables.sh
 echo "############################################################"
 echo "# Clearing disk and make partitions"
 echo "############################################################"
+# In case swap is active or instalation canceled without ending ok
+[ -f /dev/mapper/swap ]; swapoff -a && cryptsetup close /dev/mapper/swap
 sgdisk --zap-all $DRIVE
 if [ $swap = y ]; then
     sgdisk --clear \
