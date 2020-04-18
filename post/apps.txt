@@ -4,16 +4,12 @@
 # acpi
 # awesome-terminal-fonts
 # bc
-# clang
+clang
 # compton-tryone-git
 # feh
 git
 # gnome-alsamixer
 # imagemagick
-mpv
-neovim
-  neovim-drop-in
-  vim-plug
 openssh
 # pavucontrol
 # pulseaudio
@@ -23,24 +19,33 @@ openssh
 # systemd-resolvconf
 tlp
 wget
-xdg-user-dirs
 # xorg-xbacklight
 # xorg-xinput
 # xorg-xrdb
 # #network-manager-applet-indicator
 sxhkd
 zsh
-zsh-autosuggestions
-zsh-completions
-zsh-history-substring-search
-zsh-syntax-highlighting
+  zsh-autosuggestions
+  zsh-completions
+  zsh-history-substring-search
+  zsh-syntax-highlighting
+
+#------------------------------------------------------------
+#     Multimedia Apps
+#------------------------------------------------------------
+mpv
+sxiv
+
+#------------------------------------------------------------
+#     Internet Apps
+#------------------------------------------------------------
+firefox
 
 #------------------------------------------------------------
 #     Apps
 #------------------------------------------------------------
 # code
 # geoclue
-firefox
 # feh
 # flameshot
 # keepassxc
@@ -48,6 +53,9 @@ imagemagick
 # openssh
 # dunst
 # redshift
+neovim
+  neovim-drop-in
+  vim-plug
 termite
 unclutter
 # variety

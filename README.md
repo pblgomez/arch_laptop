@@ -18,4 +18,5 @@ Based on (https://wiki.archlinux.org/index.php/User:Altercation/Bullet_Proof_Arc
     ```
 3. There's some scripts (that you should check first!) on /tmp/var/post
     ```
-    /tmp/var/post/0000.
+    /tmp/var/post/0000-RunAll.sh
+    ```

@@ -109,6 +109,7 @@ fi
 
 echo "############################################################"
 echo "# Finished step1, now to step2"
+echo "# execute /root/step2.sh"
 echo "############################################################"
 cp $DIR/step2.sh /mnt/root/.
 cp $DIR/variables.sh /mnt/root/.

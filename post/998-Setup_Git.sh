@@ -17,7 +17,10 @@ echo "Don't continue if you haven't done it. Crtl+c to cancel"
 echo "----------------------------------------------------------------------"
 sleep 3s
 
-source variables
+ThisDir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+source $ThisDir/variables
 git config --global user.name $name
 git config --global user.email $email
 sudo git config --system core.editor $EDITOR
+
+mv $HOME/.gitconfig $HOME/.config/git/config

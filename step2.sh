@@ -99,6 +99,5 @@ rm -rfv $DIR/step2.sh $DIR/variables.sh
 echo "############################################################"
 echo "# Finished. Now type:"
 echo "# exit"
-echo "# shutdown now"
 echo "############################################################"
-exit
+eval exit
