@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+set -e
+
+name="John Doe"
+email="johndoe@example.com"
+EDITOR=$EDITOR

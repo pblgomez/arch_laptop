@@ -108,6 +108,7 @@ echo "# Finished step1, now to step2"
 echo "############################################################"
 cp $DIR/step2.sh /mnt/root/.
 cp $DIR/variables.sh /mnt/root/.
+cp -r $DIR/post /mnt/var/tmp/.
 arch-chroot /mnt
 
 echo "############################################################"
