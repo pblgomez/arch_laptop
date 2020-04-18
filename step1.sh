@@ -21,7 +21,7 @@ if [ $swap = y ]; then
 else
     sgdisk --clear \
          --new=1:0:+550MiB --typecode=1:ef00 --change-name=1:EFI \
-         --new=3:0:0       --typecode=3:8300 --change-name=3:$name_system \
+         --new=2:0:0       --typecode=2:8300 --change-name=2:$name_system \
            $DRIVE
 fi
 
