@@ -55,19 +55,21 @@ vscodium-bin
 #------------------------------------------------------------
 #     Apps
 #------------------------------------------------------------
-# geoclue
+arc-gtk-theme
+# dunst
 # feh
+# geoclue
 # flameshot
 # keepassxc
 imagemagick
-# openssh
-# dunst
-# redshift
+lxappearance
 man-pages
   man-db
 neovim
   neovim-drop-in
   vim-plug
+# openssh
+# redshift
 unclutter
 vifm
 # wireguard-arch
