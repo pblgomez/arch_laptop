@@ -56,6 +56,8 @@ vscodium-bin
 #     Apps
 #------------------------------------------------------------
 arc-gtk-theme
+dmenu
+  j4-dmenu-desktop
 # dunst
 # feh
 # geoclue
