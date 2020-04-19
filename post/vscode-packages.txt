@@ -1,0 +1,4 @@
+keesschollaart.vscode-home-assistant
+platformio.platformio-ide
+jaspernorth.vscode-pigments
+dracula-theme.theme-dracula

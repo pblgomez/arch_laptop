@@ -42,6 +42,12 @@ sxiv
 firefox
 
 #------------------------------------------------------------
+#     Apps Terminals
+#------------------------------------------------------------
+alacritty
+# termite
+
+#------------------------------------------------------------
 #     Apps Editors
 #------------------------------------------------------------
 vscodium-bin
@@ -62,11 +68,11 @@ man-pages
 neovim
   neovim-drop-in
   vim-plug
-termite
 unclutter
-# variety
+vifm
 # wireguard-arch
 # wireguard-tools
+xwallpaper
 
 #------------------------------------------------------------
 #     Fonts
