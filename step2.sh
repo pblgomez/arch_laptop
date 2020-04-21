@@ -41,6 +41,7 @@ echo "# Hostname and hosts and network"
 echo "############################################################"
 echo "$set_hostname" > /etc/hostname
 echo "127.0.1.1     $set_hostname.localdomain   $set_hostname" >> /etc/hosts
+systemctl enable NetworkManager
 systemctl enable dhcpcd
 
 echo "############################################################"

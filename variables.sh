@@ -18,6 +18,7 @@ name_swap="cryptswap"                                                     # nomb
 
 kernel="linux-zen"                                                        # linux, linux-zen, linux-lts
 
+TZ="Atlantic/Canary"
 locale="en_US"
 
 bootloader="grub"                                                         # grub,refind

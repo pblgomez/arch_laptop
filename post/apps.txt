@@ -2,14 +2,11 @@
 #     System
 #------------------------------------------------------------
 # acpi
-# awesome-terminal-fonts
 # bc
 clang
-# compton-tryone-git
 # feh
 git
-# gnome-alsamixer
-# imagemagick
+light
 openssh
 # pavucontrol
 # pulseaudio
@@ -18,9 +15,9 @@ openssh
 # stow
 # systemd-resolvconf
 tlp
+udiskie
 wget
-# xorg-xbacklight
-# xorg-xinput
+xorg-xinput
 # xorg-xrdb
 # #network-manager-applet-indicator
 sxhkd
@@ -33,6 +30,7 @@ zsh
 #------------------------------------------------------------
 #     Apps Multimedia 
 #------------------------------------------------------------
+mps-youtube
 mpv
 sxiv
 
@@ -58,11 +56,8 @@ vscodium-bin
 arc-gtk-theme
 dmenu
   j4-dmenu-desktop
-# dunst
-# feh
-# geoclue
+dunst
 # flameshot
-# keepassxc
 imagemagick
 lxappearance
 man-pages
@@ -70,17 +65,20 @@ man-pages
 neovim
   neovim-drop-in
   vim-plug
-# openssh
-# redshift
+python-tldextract
+rsync
+rofi
 unclutter
 vifm
-# wireguard-arch
-# wireguard-tools
+xclip
 xwallpaper
+redshift
+wireguard-tools
 
 #------------------------------------------------------------
 #     Fonts
 #------------------------------------------------------------
+awesome-terminal-fonts
 # otf-fira-code
 # ttf-inconsolata
 # ttf-iosevka-term
