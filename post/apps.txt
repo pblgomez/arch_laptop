@@ -17,6 +17,7 @@ openssh
 # systemd-resolvconf
 udiskie
 wget
+xss-lock
 xorg-xinput
 # xorg-xrdb
 # #network-manager-applet-indicator
