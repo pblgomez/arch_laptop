@@ -6,6 +6,7 @@ autorandr
 clang
 # feh
 git
+laptop-mode-tools
 light
 openssh
 # pavucontrol
@@ -14,7 +15,6 @@ openssh
 # snapd
 # stow
 # systemd-resolvconf
-tlp
 udiskie
 wget
 xorg-xinput
