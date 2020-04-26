@@ -30,7 +30,7 @@ if [ -f /usr/bin/laptop_mode ]; then
   sudo systemctl enable laptop-mode.service
   echo "#!/usr/bin/env bash
 
-light -S 30" | sudo tee /etc/laptop-mode/batt-start/brightness.sh
+light -T 0.4" | sudo tee /etc/laptop-mode/batt-start/brightness.sh
   sudo chmod +x /etc/laptop-mode/batt-start/brightness.sh
   echo "#!/usr/bin/env bash
 

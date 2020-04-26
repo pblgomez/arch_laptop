@@ -8,11 +8,13 @@ clang
 git
 laptop-mode-tools
 light
+openresolv
 openssh
 # pavucontrol
 # pulseaudio
 # python-pywal
 # snapd
+sshfs
 # stow
 # systemd-resolvconf
 udiskie
@@ -20,7 +22,7 @@ wget
 xss-lock
 xorg-xinput
 # xorg-xrdb
-# #network-manager-applet-indicator
+network-manager-applet
 sxhkd
 zsh
   zsh-autosuggestions
@@ -46,9 +48,11 @@ alacritty
 # termite
 
 #------------------------------------------------------------
-#     Apps Editors
+#     Apps Docs
 #------------------------------------------------------------
 vscodium-bin
+zathura
+  zathura-pdf-poppler
 
 #------------------------------------------------------------
 #     Apps
