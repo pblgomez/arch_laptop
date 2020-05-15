@@ -10,13 +10,10 @@ laptop-mode-tools
 light
 openresolv
 openssh
-# pavucontrol
-# pulseaudio
 # python-pywal
 # snapd
 sshfs
 # stow
-# systemd-resolvconf
 udiskie
 wget
 xss-lock
@@ -36,12 +33,15 @@ zsh
 jack2
   pulseaudio-jack
 mpv
+pulseaudio
+  pavucontrol
 sxiv
 
 #------------------------------------------------------------
 #     Apps Internet 
 #------------------------------------------------------------
 firefox
+kdeconnect
 nmap
 telegram-desktop
 whatsapp-nativefier
