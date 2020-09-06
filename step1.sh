@@ -84,7 +84,7 @@ echo "# Initate pacman keyring and selecting mirrors"
 echo "############################################################"
 pacman-key --init
 pacman-key --populate archlinux
-pacman-key --refresh-keys
+# pacman-key --refresh-keys
 pacman -Sy --noconfirm --needed reflector
 reflector --latest 50 --number 20 --sort score --save /etc/pacman.d/mirrorlist
 

@@ -1,11 +1,11 @@
 # arch_laptop
 
-Based on (https://wiki.archlinux.org/index.php/User:Altercation/Bullet_Proof_Arch_Install#Installation_of_Base_Arch_Linux_System)[This article]
+Based on [This article](https://wiki.archlinux.org/index.php/User:Altercation/Bullet_Proof_Arch_Install#Installation_of_Base_Arch_Linux_System) 
 
 1. Boot the arch install media
     ```
     pacman -Sy git
-    git clone http://github.com/pblgomez/arch_laptop.git
+    git clone https://github.com/pblgomez/arch_laptop.git
     ```
 1. Change all the variables on variables.sh
     ```
@@ -16,7 +16,7 @@ Based on (https://wiki.archlinux.org/index.php/User:Altercation/Bullet_Proof_Arc
     ```
     /root/step2.sh
     ```
-3. There's some scripts (that you should check first!) on /tmp/var/post
+1. There's some scripts (that you should check first!) on /tmp/var/post
     ```
     /tmp/var/post/0000-RunAll.sh
     ```
