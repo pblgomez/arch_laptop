@@ -11,10 +11,13 @@ source $DIR/variables.sh
 echo "############################################################"
 echo "# Clearing disk and make partitions"
 echo "############################################################"
+
 # In case swap is active or instalation canceled without ending ok
 swapoff -a
 [ -f "/dev/mapper/swap" ] && cryptsetup close /dev/mapper/swap
 partprobe $DRIVE
+
+# Partition the disk
 sgdisk --zap-all $DRIVE
 if [ $swap = y ]; then
     sgdisk --clear \
@@ -91,7 +94,8 @@ reflector --latest 50 --number 20 --sort score --save /etc/pacman.d/mirrorlist
 echo "############################################################"
 echo "# Installing base system"
 echo "############################################################"
-pacstrap /mnt base btrfs-progs base-devel intel-ucode \
+pacstrap /mnt \
+    base btrfs-progs base-devel \
     $kernel linux-firmware intel-ucode \
     efibootmgr grub grub-btrfs \
     dhcpcd wpa_supplicant networkmanager \
