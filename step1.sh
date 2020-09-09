@@ -99,7 +99,7 @@ pacstrap /mnt \
     $kernel linux-firmware intel-ucode \
     efibootmgr grub grub-btrfs \
     dhcpcd wpa_supplicant networkmanager \
-    zsh neovim openssh
+    zsh neovim openssh git python
 
 echo "############################################################"
 echo "# Generating fstab and chroot to new arch system"
