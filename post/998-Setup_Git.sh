@@ -10,7 +10,6 @@ set -e
 
 
 
-
 echo "----------------------------------------------------------------------"
 echo "First edit variables file and write your own details"
 echo "Don't continue if you haven't done it. Crtl+c to cancel"

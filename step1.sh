@@ -75,7 +75,7 @@ umount /mnt
 echo "############################################################"
 echo "# Mounting the subvolumes + boot"
 echo "############################################################"
-o_btrfs=defaults,x-mount.mkdir,compress=lzo,ssd,noatime
+o_btrfs=defaults,x-mount.mkdir,compress=zstd:7,ssd,noatime,space_cache,commit=120
 mount -o subvol=@${distro},$o_btrfs /dev/mapper/$root_vol_name /mnt/
 mount -o subvol=@${distro}_var,$o_btrfs /dev/mapper/$root_vol_name /mnt/var
 mkdir /mnt/boot
@@ -99,7 +99,7 @@ pacstrap /mnt \
     $kernel linux-firmware intel-ucode \
     efibootmgr grub grub-btrfs \
     dhcpcd wpa_supplicant networkmanager \
-    zsh neovim
+    zsh neovim openssh
 
 echo "############################################################"
 echo "# Generating fstab and chroot to new arch system"

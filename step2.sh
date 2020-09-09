@@ -40,8 +40,12 @@ echo "############################################################"
 echo "# Hostname and hosts and network"
 echo "############################################################"
 echo "$set_hostname" > /etc/hostname
-echo "127.0.1.1     $set_hostname.localdomain   $set_hostname" >> /etc/hosts
-systemctl enable --now NetworkManager dhcpcd sshd
+echo "127.0.0.1       localhost\n
+::1       localhost\n
+127.0.1.1     $set_hostname.localdomain   $set_hostname" >> /etc/hosts
+systemctl enable NetworkManager
+systemctl enable dhcpcd
+systemctl enable sshd
 
 echo "############################################################"
 echo "# mkinitcpio"

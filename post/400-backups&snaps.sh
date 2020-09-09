@@ -25,7 +25,7 @@ if ! hash snapper 2>/dev/null; then
   sudo umount /mnt
 
   # Mount the subvolumes to the snapper mount point
-  o_btrfs=defaults,x-mount.mkdir,compress=lzo,ssd,noatime
+  o_btrfs=defaults,x-mount.mkdir,compress=zstd:7,ssd,noatime,space_cache,commit=120
   sudo mount -o subvol=@snapshot_${distro}_root,$o_btrfs /dev/mapper/$root_vol_name /.snapshots/
   sudo mount -o subvol=@snapshot_${distro}_home,$o_btrfs /dev/mapper/$root_vol_name /home/.snapshots/
 
@@ -36,6 +36,6 @@ if ! hash snapper 2>/dev/null; then
   # Populate fstab
   id_snapshot_root=$(sudo btrfs sub list / | grep @snapshot_arch_root$ | awk '{print$2}')
   id_snapshot_home=$(sudo btrfs sub list / | grep @snapshot_arch_home$ | awk '{print$2}')
-  echo "LABEL=archroot        /.snapshots        btrfs      discard,rw,noatime,compress=lzo,ssd,space_cache,subvolid=$id_snapshot_root,subvol=/@snapshot_arch_root, 0 0" | sudo tee -a /etc/fstab
-  echo "LABEL=archroot      	/home/.snapshots   btrfs     	discard,rw,noatime,compress=lzo,ssd,space_cache,subvolid=$id_snapshot_home,subvol=/@snapshot_arch_home,	0 0" | sudo tee -a /etc/fstab
+  echo "LABEL=archroot        /.snapshots        btrfs      discard,rw,noatime,compress=zstd:7,ssd,space_cache,commit=120,subvolid=$id_snapshot_root,subvol=/@snapshot_arch_root, 0 0" | sudo tee -a /etc/fstab
+  echo "LABEL=archroot      	/home/.snapshots   btrfs     	discard,rw,noatime,compress=zstd:7,ssd,space_cache,commit=120,subvolid=$id_snapshot_home,subvol=/@snapshot_arch_home,	0 0" | sudo tee -a /etc/fstab
 fi
