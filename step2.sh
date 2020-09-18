@@ -46,7 +46,7 @@ echo "127.0.0.1       localhost\n
 systemctl enable NetworkManager
 systemctl enable dhcpcd
 systemctl enable sshd
-systemctl enable ntp
+systemctl enable ntpd
 
 echo "############################################################"
 echo "# mkinitcpio"
