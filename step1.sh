@@ -95,7 +95,7 @@ echo "############################################################"
 echo "# Installing base system"
 echo "############################################################"
 pacstrap /mnt \
-    base btrfs-progs base-devel \
+    base btrfs-progs base-devel ntp \
     $kernel $kernel-headers linux-firmware intel-ucode \
     efibootmgr grub grub-btrfs \
     dhcpcd wpa_supplicant networkmanager \
