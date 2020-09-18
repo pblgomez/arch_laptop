@@ -96,7 +96,7 @@ echo "# Installing base system"
 echo "############################################################"
 pacstrap /mnt \
     base btrfs-progs base-devel \
-    $kernel linux-firmware intel-ucode \
+    $kernel $kernel-headers linux-firmware intel-ucode \
     efibootmgr grub grub-btrfs \
     dhcpcd wpa_supplicant networkmanager \
     zsh neovim openssh git python
