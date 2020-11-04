@@ -1,0 +1,11 @@
+---
+- name: Install nvidia driver
+  pacman:
+    name:
+      - nvidia
+      - nvidia-dkms
+      - bumblebee
+      - bbswitch-dkms
+    state: present
+    update_cache: yes
+  become: true

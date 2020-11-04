@@ -1,0 +1,6 @@
+---
+- name: Install sxhkd
+  aur:
+    name: 
+      - sxhkd
+      - vim-sxhkdrc-git

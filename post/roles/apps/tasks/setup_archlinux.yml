@@ -1,0 +1,142 @@
+---
+- name: "add multilib"
+  become: true
+  replace:
+    dest: "/etc/pacman.conf"
+    regexp: '^#\[multilib\]'
+    replace: "[multilib]"
+- name: "add multilib (cont)"
+  become: true
+  lineinfile:
+    dest: "/etc/pacman.conf"
+    regexp: '^#Include = /etc/pacman.d/mirrorlist'
+    line: 'Include = /etc/pacman.d/mirrorlist'
+    insertafter: "^[multilib].*"
+
+- name: Install apps
+  aur:
+    name:
+    # System apps
+#     - alacritty
+      - autorandr
+      - blueman
+      - borgmatic
+      - brave-bin
+      - clang
+      - clipmenu
+      - cronie
+      - cryfs
+      - dmenu
+      - feh
+      - flatpak
+      - git
+      - htop
+      - imagemagick
+      - kdeconnect
+      - kitty
+      - lf
+      - man
+      - neovim
+      - neovim-drop-in
+      - openssh
+      - pcmanfm-gtk3
+      - pdftk
+      - redshift
+      - scrot
+      - snapd
+      - snapper
+      - snap-pac
+      - snap-pac-grub
+      - sshfs
+      - sshpass
+      - tldr
+      - udiskie
+      - unzip
+      - wget
+      - wireguard-tools
+      - xbanish
+      - xidlehook
+      - xsecurelock
+      - xss-lock
+      - yadm
+      - zsh
+      - zsh-autosuggestions
+      - zsh-completions
+      - zsh-history-substring-search
+      - zsh-syntax-highlighting
+    # Fonts
+      - awesome-terminal-fonts
+      - otf-font-awesome
+      - ttf-consolas-ligaturized
+    # Multimedia
+      - alsa-utils
+      - kdenlive
+      - mpv
+      - pulseaudio
+      - volumeicon
+    # Internet
+      - firefox
+      - nmap
+      - telegram-desktop
+    # Docs
+      - joplin
+      - libreoffice-fresh
+      - vscodium-bin
+      - zathura
+      - zathura-pdf-poppler
+    # Crypto
+      - ledger-live-bin
+      - ledger-udev
+      - neon-wallet-bin
+    state: present
+
+- name: Install from flatpak
+  flatpak:
+    name: com.spotify.Client
+    state: present
+
+- name: Install DevOps apps
+  aur:
+    name:
+      - ansible
+      - docker
+      - docker-compose
+      - kind-bin
+      - kubectl
+      - terraform
+      - terraform-lsp-bin
+      - vagrant
+      - virtualbox
+      - virtualbox-ext-oracle
+      - virtualbox-host-dkms
+
+- name: add user to docker group
+  become: true
+  user:
+    name: "{{ lookup('env', 'USER') }}"
+    groups:
+      - "{{ item }}"
+    append: true
+  with_items:
+    - docker
+    - vboxusers
+
+- name: Enable services
+  become: true
+  systemd:
+    name: "{{ item }}"
+    state: started
+    enabled: yes
+  with_items:
+    - autorandr
+    - bluetooth
+    - snapd
+    - docker
+
+- name: Configure zsh
+  become: true
+  copy:
+    dest: /etc/zsh/zshenv
+    content: |
+      export XDG_CONFIG_HOME="$HOME/.config"
+      export ZDOTDIR="$XDG_CONFIG_HOME/zsh"

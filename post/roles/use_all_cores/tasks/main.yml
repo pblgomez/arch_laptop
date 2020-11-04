@@ -1,0 +1,12 @@
+---
+- name: Getting the number of cores
+  shell: nproc
+  register: cores
+  changed_when: False
+
+- name: Configure makepkg to use all cores
+  become: true
+  lineinfile:
+    path: /etc/makepkg.conf
+    regexp: '^(.*)MAKEFLAGS="-j(.*)$'
+    line: 'MAKEFLAGS="-j{{ cores.stdout | int +1 }}"'

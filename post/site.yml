@@ -1,0 +1,13 @@
+---
+- hosts: 127.0.0.1
+  connection: local
+  roles:
+    - yay
+    - use_all_cores
+    - i3wm
+    - bspwm
+    - nvidia
+    - apps
+    - vscodium_extensions
+    - firefox
+    - laptop

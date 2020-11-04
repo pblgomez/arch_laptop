@@ -1,0 +1,16 @@
+---
+- name: Install bspwm
+  pacman:
+    name:
+      - bspwm
+      - dmenu
+      - picom-tryone-git
+    state: present
+    update_cache: yes
+  become: true
+
+- include_role:
+    name: xorg
+
+- include_role:
+    name: sxhkd
