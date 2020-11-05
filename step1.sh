@@ -97,7 +97,7 @@ echo "############################################################"
 pacstrap /mnt \
     base btrfs-progs base-devel ntp \
     $kernel $kernel-headers linux-firmware intel-ucode \
-    efibootmgr grub grub-btrfs plymouth \
+    efibootmgr grub grub-btrfs \
     dhcpcd wpa_supplicant networkmanager \
     zsh neovim openssh git python
 

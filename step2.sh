@@ -52,7 +52,7 @@ echo "############################################################"
 echo "# mkinitcpio"
 echo "############################################################"
 sed -i 's/^MODULES=.*/MODULES=( i915? vboxvideo? )/' /etc/mkinitcpio.conf
-sed -i 's/^HOOKS=.*/HOOKS=(base udev plymouth plymouth-encrypt autodetect modconf block filesystems keyboard fsck)/' /etc/mkinitcpio.conf
+sed -i 's/^HOOKS=.*/HOOKS=(base udev autodetect modconf block encrypt filesystems keyboard fsck)/' /etc/mkinitcpio.conf
 mkinitcpio -p $kernel
 
 echo "############################################################"
@@ -64,7 +64,6 @@ if [ $bootloader = "grub" ]; then
     echo "############################################################"
     sed -i '/^#GRUB_ENABLE_CRYPTO.*/s/^#//' /etc/default/grub
     sed -i 's/^GRUB_TIMEOUT.*/GRUB_TIMEOUT=3/' /etc/default/grub
-    sed -i 's+GRUB_CMDLINE_LINUX_DEFAULT=.*+GRUB_CMDLINE_LINUX_DEFAULT="quiet splash loglevel=3 rd.udev.log_priority=3 vt.global_cursor_default=0"+' /etc/default/grub
     sed -i 's+GRUB_CMDLINE_LINUX=.*+GRUB_CMDLINE_LINUX="cryptdevice=/dev/disk/by-partlabel/'$name_system':'${root_vol_name}' root=/dev/mapper/'$root_vol_name'"+' /etc/default/grub
     grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB --recheck
     grub-mkconfig --output /boot/grub/grub.cfg
