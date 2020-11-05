@@ -44,7 +44,7 @@ echo "127.0.0.1       localhost\n
 ::1       localhost\n
 127.0.1.1     $set_hostname.localdomain   $set_hostname" >> /etc/hosts
 systemctl enable NetworkManager
-systemctl enable dhcpcd
+#systemctl enable dhcpcd
 systemctl enable sshd
 systemctl enable ntpd
 
@@ -55,10 +55,20 @@ sed 's/#MAKEFLAGS.*/MAKEFLAGS="-j$(nproc)"/' /etc/makepkg.conf
 
 
 echo "############################################################"
+echo "# Install plymouth"
+echo "############################################################"
+git clone https://aur.archlinux.org/plymouth.git /var/tmp/plymouth
+cd /var/tmp/plymouth
+makepkg --syncdeps --install --noconfirm
+cd ~
+sed -i 's/.*Theme.*/Theme=bgrt/' /etc/plymouth/plymouthd.conf
+sed -i 's/^GRUB_CMD.*ULT=.*/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash loglevel=3 rd.udev.log_priority=3 vt.global_cursor_default=0"/' /etc/default/grub
+
+echo "############################################################"
 echo "# mkinitcpio"
 echo "############################################################"
 sed -i 's/^MODULES=.*/MODULES=( i915? vboxvideo? )/' /etc/mkinitcpio.conf
-sed -i 's/^HOOKS=.*/HOOKS=(base udev autodetect modconf block encrypt filesystems keyboard fsck)/' /etc/mkinitcpio.conf
+sed -i 's/^HOOKS=.*/HOOKS=(base udev plymouth plymouth-encrypt autodetect modconf block filesystems keyboard fsck)/' /etc/mkinitcpio.conf
 sed -i '/#COMPRESSION="zstd"/s/^#//g' /etc/mkinitcpio.conf
 mkinitcpio -p $kernel
 
@@ -72,6 +82,7 @@ if [ $bootloader = "grub" ]; then
     sed -i '/^#GRUB_ENABLE_CRYPTO.*/s/^#//' /etc/default/grub
     sed -i 's/^GRUB_TIMEOUT.*/GRUB_TIMEOUT=3/' /etc/default/grub
     sed -i 's+GRUB_CMDLINE_LINUX=.*+GRUB_CMDLINE_LINUX="cryptdevice=/dev/disk/by-partlabel/'$name_system':'${root_vol_name}' root=/dev/mapper/'$root_vol_name'"+' /etc/default/grub
+    sed -i 's+.*GRUB_THEME.*+GRUB_THEME="/usr/share/grub/themes/Vimix/theme.txt"+' /etc/default/grub
     grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB --recheck
     grub-mkconfig --output /boot/grub/grub.cfg
 elif [ $bootloader = "refind" ]; then
