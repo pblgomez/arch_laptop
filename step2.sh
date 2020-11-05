@@ -4,10 +4,6 @@ set -e
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 source $DIR/variables.sh
 
-# echo "############################################################"
-# echo "# Password for root:"
-# echo "############################################################"
-
 echo "############################################################"
 echo "# Create user"
 echo "############################################################"
@@ -78,8 +74,8 @@ if [ $bootloader = "grub" ]; then
     sed -i 's/^GRUB_TIMEOUT.*/GRUB_TIMEOUT=3/' /etc/default/grub
     sed -i 's+GRUB_CMDLINE_LINUX=.*+GRUB_CMDLINE_LINUX="cryptdevice=/dev/disk/by-partlabel/'$name_system':'${root_vol_name}' root=/dev/mapper/'$root_vol_name'"+' /etc/default/grub
     sed -i 's+.*GRUB_THEME.*+GRUB_THEME="/boot/grub/themes/Vimix/theme.txt"+' /etc/default/grub
-    cp -r /usr/share/grub/themes/Vimix /boot/grub/themes/
     grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB --recheck
+    cp -r /usr/share/grub/themes/Vimix /boot/grub/themes/
     grub-mkconfig --output /boot/grub/grub.cfg
 elif [ $bootloader = "refind" ]; then
     echo "############################################################"
@@ -116,7 +112,7 @@ pacman -Sy libdrm pango docbook-xsl --noconfirm
 sudo -u nobody git clone https://aur.archlinux.org/plymouth.git /var/tmp/plymouth
 cd /var/tmp/plymouth
 sudo -u nobody makepkg
-pacman -U plymouth*.zst
+pacman -U plymouth*.zst --noconfirm
 cd ~
 sed -i 's/.*Theme.*/Theme=bgrt/' /etc/plymouth/plymouthd.conf
 sed -i 's/^GRUB_CMD.*ULT=.*/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash loglevel=3 rd.udev.log_priority=3 vt.global_cursor_default=0"/' /etc/default/grub
