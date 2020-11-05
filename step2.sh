@@ -7,7 +7,6 @@ source $DIR/variables.sh
 # echo "############################################################"
 # echo "# Password for root:"
 # echo "############################################################"
-# passwd
 
 echo "############################################################"
 echo "# Create user"
@@ -27,7 +26,7 @@ echo "############################################################"
 echo "# Install programs"
 echo "############################################################"
 pacman -Syu --noconfirm \
-  btrfs-progs base-devel ntp \
+  btrfs-progs ntp \
   $kernel $kernel-headers linux-firmware intel-ucode dkms \
   neovim openssh git python \
   wpa_supplicant networkmanager \
@@ -67,25 +66,6 @@ echo "# makepkg.conf"
 echo "############################################################"
 sed 's/#MAKEFLAGS.*/MAKEFLAGS="-j$(nproc)"/' /etc/makepkg.conf
 
-
-echo "############################################################"
-echo "# Install plymouth"
-echo "############################################################"
-git clone https://aur.archlinux.org/plymouth.git /var/tmp/plymouth
-cd /var/tmp/plymouth
-makepkg --syncdeps --install --noconfirm
-cd ~
-sed -i 's/.*Theme.*/Theme=bgrt/' /etc/plymouth/plymouthd.conf
-sed -i 's/^GRUB_CMD.*ULT=.*/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash loglevel=3 rd.udev.log_priority=3 vt.global_cursor_default=0"/' /etc/default/grub
-
-echo "############################################################"
-echo "# mkinitcpio"
-echo "############################################################"
-sed -i 's/^MODULES=.*/MODULES=( i915? vboxvideo? )/' /etc/mkinitcpio.conf
-sed -i 's/^HOOKS=.*/HOOKS=(base udev plymouth plymouth-encrypt autodetect modconf block filesystems keyboard fsck)/' /etc/mkinitcpio.conf
-sed -i '/#COMPRESSION="zstd"/s/^#//g' /etc/mkinitcpio.conf
-mkinitcpio -p $kernel
-
 echo "############################################################"
 echo "# Bootloader"
 echo "############################################################"
@@ -94,11 +74,11 @@ if [ $bootloader = "grub" ]; then
     echo "# GRUB"
     echo "############################################################"
     pacman -Sy grub grub-btrfs grub-theme-vimix --noconfirm
-    cp -r /usr/share/grub/themes/Vimix /boot/grub/themes/boo
     sed -i '/^#GRUB_ENABLE_CRYPTO.*/s/^#//' /etc/default/grub
     sed -i 's/^GRUB_TIMEOUT.*/GRUB_TIMEOUT=3/' /etc/default/grub
     sed -i 's+GRUB_CMDLINE_LINUX=.*+GRUB_CMDLINE_LINUX="cryptdevice=/dev/disk/by-partlabel/'$name_system':'${root_vol_name}' root=/dev/mapper/'$root_vol_name'"+' /etc/default/grub
     sed -i 's+.*GRUB_THEME.*+GRUB_THEME="/boot/grub/themes/Vimix/theme.txt"+' /etc/default/grub
+    cp -r /usr/share/grub/themes/Vimix /boot/grub/themes/
     grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB --recheck
     grub-mkconfig --output /boot/grub/grub.cfg
 elif [ $bootloader = "refind" ]; then
@@ -128,6 +108,28 @@ elif [ $bootloader = "refind" ]; then
     sed -i 's/^timeout.*/timeout 3/' /boot/EFI/refind/refind.conf
 fi
 
+
+echo "############################################################"
+echo "# Install plymouth"
+echo "############################################################"
+pacman -Sy libdrm pango docbook-xsl --noconfirm
+sudo -u nobody git clone https://aur.archlinux.org/plymouth.git /var/tmp/plymouth
+cd /var/tmp/plymouth
+sudo -u nobody makepkg
+pacman -U plymouth*.zst
+cd ~
+sed -i 's/.*Theme.*/Theme=bgrt/' /etc/plymouth/plymouthd.conf
+sed -i 's/^GRUB_CMD.*ULT=.*/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash loglevel=3 rd.udev.log_priority=3 vt.global_cursor_default=0"/' /etc/default/grub
+
+echo "############################################################"
+echo "# mkinitcpio"
+echo "############################################################"
+sed -i 's/^MODULES=.*/MODULES=( i915? vboxvideo? )/' /etc/mkinitcpio.conf
+sed -i 's/^HOOKS=.*/HOOKS=(base udev plymouth plymouth-encrypt autodetect modconf block filesystems keyboard fsck)/' /etc/mkinitcpio.conf
+sed -i '/#COMPRESSION="zstd"/s/^#//g' /etc/mkinitcpio.conf
+mkinitcpio -p $kernel
+
+
 echo "############################################################"
 echo "# crypttab"
 echo "############################################################"
@@ -138,4 +140,5 @@ echo "############################################################"
 echo "# Finished. Now type:"
 echo "# exit"
 echo "############################################################"
+exit
 eval exit

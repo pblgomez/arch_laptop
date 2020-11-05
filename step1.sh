@@ -95,7 +95,7 @@ echo "############################################################"
 echo "# Installing base system"
 echo "############################################################"
 pacstrap /mnt \
-    base \
+    base base-devel
 
 echo "############################################################"
 echo "# Generating fstab and chroot to new arch system"
