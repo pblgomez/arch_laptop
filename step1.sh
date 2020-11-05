@@ -95,11 +95,7 @@ echo "############################################################"
 echo "# Installing base system"
 echo "############################################################"
 pacstrap /mnt \
-    base btrfs-progs base-devel ntp \
-    $kernel $kernel-headers linux-firmware intel-ucode dkms \
-    efibootmgr grub grub-btrfs grub-theme-vimix \
-    dhcpcd wpa_supplicant networkmanager \
-    zsh neovim openssh git python
+    base \
 
 echo "############################################################"
 echo "# Generating fstab and chroot to new arch system"

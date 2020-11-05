@@ -12,6 +12,7 @@ source $DIR/variables.sh
 echo "############################################################"
 echo "# Create user"
 echo "############################################################"
+pacman -Syu --noconfirm zsh
 read -p "Enter username: " username
 useradd -G sys,network,scanner,power,rfkill,users,video,uucp,storage,optical,lp,audio,wheel -s $(which zsh) -m $username
 echo "Enter password:"
@@ -20,6 +21,19 @@ passwd $username
 sed -i 's/# %w.*) ALL$/%wheel ALL=(ALL) ALL/g' /etc/sudoers
 # Disable root permission
 sed -i '/^root.*/ s/:x:/: :/' /etc/passwd
+
+
+echo "############################################################"
+echo "# Install programs"
+echo "############################################################"
+pacman -Syu --noconfirm \
+  btrfs-progs base-devel ntp \
+  $kernel $kernel-headers linux-firmware intel-ucode dkms \
+  neovim openssh git python \
+  wpa_supplicant networkmanager \
+  efibootmgr
+  # dhcpcd
+
 
 echo "############################################################"
 echo "# Time"
@@ -79,10 +93,12 @@ if [ $bootloader = "grub" ]; then
     echo "############################################################"
     echo "# GRUB"
     echo "############################################################"
+    pacman -Sy grub grub-btrfs grub-theme-vimix --noconfirm
+    cp -r /usr/share/grub/themes/Vimix /boot/grub/themes/boo
     sed -i '/^#GRUB_ENABLE_CRYPTO.*/s/^#//' /etc/default/grub
     sed -i 's/^GRUB_TIMEOUT.*/GRUB_TIMEOUT=3/' /etc/default/grub
     sed -i 's+GRUB_CMDLINE_LINUX=.*+GRUB_CMDLINE_LINUX="cryptdevice=/dev/disk/by-partlabel/'$name_system':'${root_vol_name}' root=/dev/mapper/'$root_vol_name'"+' /etc/default/grub
-    sed -i 's+.*GRUB_THEME.*+GRUB_THEME="/usr/share/grub/themes/Vimix/theme.txt"+' /etc/default/grub
+    sed -i 's+.*GRUB_THEME.*+GRUB_THEME="/boot/grub/themes/Vimix/theme.txt"+' /etc/default/grub
     grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB --recheck
     grub-mkconfig --output /boot/grub/grub.cfg
 elif [ $bootloader = "refind" ]; then
