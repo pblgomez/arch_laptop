@@ -49,10 +49,17 @@ systemctl enable sshd
 systemctl enable ntpd
 
 echo "############################################################"
+echo "# makepkg.conf"
+echo "############################################################"
+sed 's/#MAKEFLAGS.*/MAKEFLAGS="-j$(nproc)"/' /etc/makepkg.conf
+
+
+echo "############################################################"
 echo "# mkinitcpio"
 echo "############################################################"
 sed -i 's/^MODULES=.*/MODULES=( i915? vboxvideo? )/' /etc/mkinitcpio.conf
 sed -i 's/^HOOKS=.*/HOOKS=(base udev autodetect modconf block encrypt filesystems keyboard fsck)/' /etc/mkinitcpio.conf
+sed -i '/#COMPRESSION="zstd"/s/^#//g' /etc/mkinitcpio.conf
 mkinitcpio -p $kernel
 
 echo "############################################################"

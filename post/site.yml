@@ -3,7 +3,6 @@
   connection: local
   roles:
     - yay
-    - use_all_cores
     - i3wm
     - bspwm
     - nvidia
