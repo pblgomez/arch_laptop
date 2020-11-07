@@ -116,11 +116,12 @@ pacman -U plymouth*.zst --noconfirm
 cd ~
 sed -i 's/.*Theme.*/Theme=bgrt/' /etc/plymouth/plymouthd.conf
 sed -i 's/^GRUB_CMD.*ULT=.*/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash loglevel=3 rd.udev.log_priority=3 vt.global_cursor_default=0"/' /etc/default/grub
+grub-mkconfig --output /boot/grub/grub.cfg
+sed -i 's/^MODULES=.*/MODULES=( i915? vboxvideo? )/' /etc/mkinitcpio.conf
 
 echo "############################################################"
 echo "# mkinitcpio"
 echo "############################################################"
-sed -i 's/^MODULES=.*/MODULES=( i915? vboxvideo? )/' /etc/mkinitcpio.conf
 sed -i 's/^HOOKS=.*/HOOKS=(base udev plymouth plymouth-encrypt autodetect modconf block filesystems keyboard fsck)/' /etc/mkinitcpio.conf
 sed -i '/#COMPRESSION="zstd"/s/^#//g' /etc/mkinitcpio.conf
 mkinitcpio -p $kernel
