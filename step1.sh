@@ -88,7 +88,7 @@ echo "############################################################"
 pacman-key --init
 pacman-key --populate archlinux
 # pacman-key --refresh-keys
-pacman -Sy --noconfirm --needed reflector
+pacman -Sy --noconfirm --needed python3 reflector
 reflector --latest 50 --number 20 --sort score --save /etc/pacman.d/mirrorlist
 
 echo "############################################################"
