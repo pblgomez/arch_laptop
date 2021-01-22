@@ -5,7 +5,7 @@
     name:
       - sway
       - xorg-server-xwayland 
-      - kitty
+      - alacritty
       #- dmenu
       #- picom-tryone-git
     state: present
