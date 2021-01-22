@@ -1,4 +1,17 @@
 ---
+- name: Create user aur_builder
+  become: true
+  user:
+    name: aur_builder
+    group: wheel
+- name: give aur_builder sudo access
+  become: true
+  lineinfile:
+    path: /etc/sudoers.d/11-install-aur_builder
+    line: 'aur_builder ALL=(ALL) NOPASSWD: /usr/bin/pacman'
+    create: yes
+    validate: 'visudo -cf %s'
+
 - name: "add multilib"
   become: true
   replace:
@@ -13,7 +26,19 @@
     line: 'Include = /etc/pacman.d/mirrorlist'
     insertafter: "^[multilib].*"
 
+- name: Add snap-pac-grub keys
+  become: true
+  become_user: aur_builder
+  command: gpg --keyserver hkps://keyserver.ubuntu.com --recv-keys EB4F9E5A60D32232BB52150C12C87A28FEAC6B20
+
+- name: Run the equivalent of "pacman -Sy" as a separate step
+  become: true
+  community.general.pacman:
+    update_cache: yes
+
 - name: Install apps
+  become: true
+  become_user: aur_builder
   aur:
     name:
     # System apps
@@ -37,7 +62,6 @@
       - lf
       - man
       - neovim
-      - neovim-drop-in
       - openssh
       - pcmanfm-gtk3
       - pdftk
@@ -74,6 +98,7 @@
       - mpv
       - pulseaudio
       - volumeicon
+      - youtube-dl
     # Internet
       - firefox
       - nmap
@@ -91,11 +116,14 @@
     state: present
 
 - name: Install from flatpak
-  flatpak:
+  become: true
+  community.general.flatpak:
     name: com.spotify.Client
     state: present
 
 - name: Install DevOps apps
+  become: true
+  become_user: aur_builder
   aur:
     name:
       - ansible

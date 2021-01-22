@@ -1,6 +1,6 @@
 ---
 - name: Install i3wm
-  pacman:
+  aur:
     name:
       - dmenu
       - i3lock

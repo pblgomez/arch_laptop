@@ -1,6 +1,6 @@
 ---
 - name: Install bspwm
-  pacman:
+  aur:
     name:
       - bspwm
       - dmenu
