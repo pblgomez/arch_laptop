@@ -64,6 +64,7 @@
       - kdeconnect
       - kitty
       - lf
+      - lxsession
       - man
       - neovim
       - openssh
