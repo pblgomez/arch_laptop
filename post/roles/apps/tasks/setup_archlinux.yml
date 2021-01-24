@@ -56,6 +56,7 @@
       - cronie
       - cryfs
       - dmenu
+      - exa
       - feh
       - flatpak
       - git
@@ -108,6 +109,8 @@
       - firefox
       - nmap
       - telegram-desktop
+    # Utilities
+      - bitwarden
     # Docs
       - joplin
       - libreoffice-fresh
