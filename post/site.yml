@@ -3,7 +3,7 @@
     #- hosts: vm
       connection: local
       roles:
-          - yay
+          - paru
           - sway
           - zsh
     # - i3wm
