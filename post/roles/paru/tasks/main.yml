@@ -1,0 +1,42 @@
+---
+    - name: Check for dependencies
+      become: yes
+      pacman:
+          name:
+              - base-devel
+              - git
+          state: present
+
+    - name: Check for paru
+      become: yes
+      pacman:
+          name:
+              - paru
+      ignore_errors: yes
+      register: paru
+
+    - debug:
+          var: paru
+
+    - name: Clone paru repository
+      git:
+          repo: https://aur.archlinux.org/paru.git
+          dest: '{{ ansible_env.HOME }}/paru'
+          version: master
+      when: '"already installed" not in paru.msg'
+
+    - name: MAKEPKG paru AUR helper
+      shell: makepkg -f --clean
+      args:
+          chdir: '{{ ansible_env.HOME }}/paru'
+      when: '"already installed" not in paru.msg'
+
+    - name: Install paru
+      shell: pacman -U --noconfirm {{ ansible_env.HOME }}/paru/paru*zst
+      become: true
+      when: '"already installed" not in paru.msg'
+
+    - name: Remove paru dir
+      file:
+          path: '{{ ansible_env.HOME }}/paru'
+          state: absent
