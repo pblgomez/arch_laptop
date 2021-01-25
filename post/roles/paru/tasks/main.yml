@@ -4,6 +4,7 @@
       pacman:
           name:
               - base-devel
+              - cargo
               - git
           state: present
 
@@ -32,7 +33,7 @@
       when: '"already installed" not in paru.msg'
 
     - name: Install paru
-      shell: pacman -U --noconfirm {{ ansible_env.HOME }}/paru/paru*zst
+      shell: pacman -U --noconfirm {{ ansible_env.HOME }}/paru/paru*pkg*zst
       become: true
       when: '"already installed" not in paru.msg'
 
