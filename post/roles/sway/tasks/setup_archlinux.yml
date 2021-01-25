@@ -1,15 +1,15 @@
 ---
-- name: Install sway
-  become: true
-  ansible.buitin.package:
-    name:
-      - sway
-      - xorg-server-xwayland 
-      - alacritty
-      - mako
+    - name: Install sway
+      become: true
+      package:
+          name:
+              - sway
+              - xorg-server-xwayland
+              - alacritty
+              - mako
       #- dmenu
       #- picom-tryone-git
-    state: present
+          state: present
 
 #- include_role:
     #name: xorg

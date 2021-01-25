@@ -1,16 +1,16 @@
 ---
-- name: Install bspwm
-  aur:
-    name:
-      - bspwm
-      - dmenu
-      - picom-tryone-git
-    state: present
-    update_cache: yes
-  become: true
+    - name: Install bspwm
+      aur:
+          name:
+              - bspwm
+              - dmenu
+              - picom-tryone-git
+          state: present
+          update_cache: yes
+      become: true
 
-- include_role:
-    name: xorg
+    - include_role:
+          name: xorg
 
-- include_role:
-    name: sxhkd
+    - include_role:
+          name: sxhkd

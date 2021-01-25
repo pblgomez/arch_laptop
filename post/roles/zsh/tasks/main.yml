@@ -1,0 +1,13 @@
+---
+- name: Install ZSH
+  package:
+    name: zsh
+    state: present
+
+- name: Configure XDG for zsh
+  become: true
+  copy: 
+    dest: "/etc/zsh/zshenv"
+    content: |
+      export XDG_CONFIG_HOME="$HOME/.config"
+      export ZDOTDIR="$XDG_CONFIG_HOME/zsh"

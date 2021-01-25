@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 #
-#    _ \  |      |  
+#    _ \  |      |
 #   |   | __ \   |  Pablo Gómez
 #   ___/  |   |  |  http://www.gitlab.com/pblgomez
 #  _|    _.__/  _|

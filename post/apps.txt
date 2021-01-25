@@ -28,7 +28,7 @@ zsh
   zsh-syntax-highlighting
 
 #------------------------------------------------------------
-#     Apps Multimedia 
+#     Apps Multimedia
 #------------------------------------------------------------
 jack2
   pulseaudio-jack
@@ -38,7 +38,7 @@ pulseaudio
 sxiv
 
 #------------------------------------------------------------
-#     Apps Internet 
+#     Apps Internet
 #------------------------------------------------------------
 firefox
 kdeconnect

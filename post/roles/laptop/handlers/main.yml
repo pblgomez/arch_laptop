@@ -1,3 +1,4 @@
-- name: Reload udev rules
-  become: true
-  shell: udevadm trigger
+---
+    - name: Reload udev rules
+      become: true
+      shell: udevadm trigger

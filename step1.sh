@@ -5,7 +5,7 @@ set -e
 ## SCRIPT DE INSTALACION DE ARCHLINUX CON LUKS+BTRFS
 ##
 
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 source "$DIR"/variables.sh
 
 echo "############################################################"
@@ -20,26 +20,26 @@ partprobe "$DRIVE"
 # Partition the disk
 sgdisk --zap-all "$DRIVE"
 if [ "$swap" = y ]; then
-    sgdisk --clear \
-         --new=1:0:+550MiB --typecode=1:ef00 --change-name=1:EFI \
-         --new=2:0:+"${swap_size}"GiB   --typecode=2:8200 --change-name=2:"$name_swap" \
-         --new=3:0:0       --typecode=3:8300 --change-name=3:"$name_system" \
-           "$DRIVE"
+	sgdisk --clear \
+		--new=1:0:+550MiB --typecode=1:ef00 --change-name=1:EFI \
+		--new=2:0:+"${swap_size}"GiB --typecode=2:8200 --change-name=2:"$name_swap" \
+		--new=3:0:0 --typecode=3:8300 --change-name=3:"$name_system" \
+		"$DRIVE"
 else
-    sgdisk --clear \
-         --new=1:0:+550MiB --typecode=1:ef00 --change-name=1:EFI \
-         --new=2:0:0       --typecode=2:8300 --change-name=2:"$name_system" \
-           "$DRIVE"
+	sgdisk --clear \
+		--new=1:0:+550MiB --typecode=1:ef00 --change-name=1:EFI \
+		--new=2:0:0 --typecode=2:8300 --change-name=2:"$name_system" \
+		"$DRIVE"
 fi
 sleep 3
 
 if [ "$swap" = y ]; then
-    echo "############################################################"
-    echo "# Bring Up Encrypted Swap"
-    echo "############################################################"
-    cryptsetup open --type plain --key-file /dev/urandom /dev/disk/by-partlabel/"$name_swap" swap
-    mkswap -L swap /dev/mapper/swap
-    swapon -L swap
+	echo "############################################################"
+	echo "# Bring Up Encrypted Swap"
+	echo "############################################################"
+	cryptsetup open --type plain --key-file /dev/urandom /dev/disk/by-partlabel/"$name_swap" swap
+	mkswap -L swap /dev/mapper/swap
+	swapon -L swap
 fi
 
 echo "############################################################"
@@ -95,17 +95,16 @@ echo "############################################################"
 echo "# Installing base system"
 echo "############################################################"
 pacstrap /mnt \
-    base base-devel
+	base base-devel
 
 echo "############################################################"
 echo "# Generating fstab and chroot to new arch system"
 echo "############################################################"
-genfstab -L /mnt >> /mnt/etc/fstab
+genfstab -L /mnt >>/mnt/etc/fstab
 if [ "$swap" = y ]; then
-    sed -i s+LABEL=swap+/dev/mapper/swap+ /mnt/etc/fstab
-    echo "swap      /dev/disk/by-partlabel/${name_swap}        /dev/urandom    swap,offset=2048,cipher=aes-xts-plain64,size=256" >> /mnt/etc/crypttab
+	sed -i s+LABEL=swap+/dev/mapper/swap+ /mnt/etc/fstab
+	echo "swap      /dev/disk/by-partlabel/${name_swap}        /dev/urandom    swap,offset=2048,cipher=aes-xts-plain64,size=256" >>/mnt/etc/crypttab
 fi
-
 
 echo "############################################################"
 echo "# Finished step1, now to step2"

@@ -1,43 +1,43 @@
 ---
-- name: Ensure ansible user exists 
-  become: true
-  user: 
-    name: ansible 
-    state: present 
-    comment: Ansible 
+    - name: Ensure ansible user exists
+      become: true
+      user:
+          name: ansible
+          state: present
+          comment: Ansible
 
-- name: Ensure ansible user accepts the SSH key 
-  become: true
-  authorized_key: 
-    user: ansible 
-    key: "{{ lookup('file', '~/.ssh/id_ed25519.pub') }}"
-    state: present 
+    - name: Ensure ansible user accepts the SSH key
+      become: true
+      authorized_key:
+          user: ansible
+          key: "{{ lookup('file', '~/.ssh/id_ed25519.pub') }}"
+          state: present
 
-- name: Ensure ansible user is in sudoers file
-  become: true
-  lineinfile:
-    path: /etc/sudoers
-    state: present
-    regexp: '^%ansible'
-    line: '%ansible  ALL=(ALL)  NOPASSWD: ALL'
-    validate: 'visudo -cf %s'
+    - name: Ensure ansible user is in sudoers file
+      become: true
+      lineinfile:
+          path: /etc/sudoers
+          state: present
+          regexp: ^%ansible
+          line: '%ansible  ALL=(ALL)  NOPASSWD: ALL'
+          validate: visudo -cf %s
 
-- name: Disable password login for user ansible
-  become: true
-  lineinfile:
-    dest: /etc/ssh/sshd_config
-    regexp: '.*PasswordAuthentication.*'
-    line: "PasswordAuthentication no"
-    state: present
-    backup: yes
+    - name: Disable password login for user ansible
+      become: true
+      lineinfile:
+          dest: /etc/ssh/sshd_config
+          regexp: .*PasswordAuthentication.*
+          line: PasswordAuthentication no
+          state: present
+          backup: yes
 
-- name: Disable Root Login
-  become: true
-  lineinfile:
-    dest: /etc/ssh/sshd_config
-    regexp: '.*PermitRootLogin.*'
-    line: "PermitRootLogin no"
-    state: present
-    backup: yes
-  notify:
-    - restart ssh
+    - name: Disable Root Login
+      become: true
+      lineinfile:
+          dest: /etc/ssh/sshd_config
+          regexp: .*PermitRootLogin.*
+          line: PermitRootLogin no
+          state: present
+          backup: yes
+      notify:
+          - restart ssh

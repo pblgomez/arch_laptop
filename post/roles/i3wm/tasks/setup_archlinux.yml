@@ -1,18 +1,18 @@
 ---
-- name: Install i3wm
-  aur:
-    name:
-      - dmenu
-      - i3lock
-      - i3status
-      - picom-tryone-git
-      - i3-gaps
-    state: present
-    update_cache: yes
-  become: true
+    - name: Install i3wm
+      aur:
+          name:
+              - dmenu
+              - i3lock
+              - i3status
+              - picom-tryone-git
+              - i3-gaps
+          state: present
+          update_cache: yes
+      become: true
 
-- include_role:
-    name: xorg
+    - include_role:
+          name: xorg
 
-- include_role:
-    name: sxhkd
+    - include_role:
+          name: sxhkd

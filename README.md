@@ -1,6 +1,6 @@
 # arch_laptop
 
-Based on [This article](https://wiki.archlinux.org/index.php/User:Altercation/Bullet_Proof_Arch_Install#Installation_of_Base_Arch_Linux_System) 
+Based on [This article](https://wiki.archlinux.org/index.php/User:Altercation/Bullet_Proof_Arch_Install#Installation_of_Base_Arch_Linux_System)
 
 1. Boot the arch install media
     ```

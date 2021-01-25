@@ -1,17 +1,17 @@
 ---
-- name: Install xorg
-  pacman:
-    name:
-      - brightnessctl
-      - gnu-free-fonts
-      - xorg-server
-      - xf86-video-intel
-      - xorg-xbacklight
-      - xorg-xinit
-      - xorg-xinput
-      - xorg-xkill
-      - xorg-xrandr
-      - xorg-xsetroot
-    state: present
-    update_cache: yes
-  become: true
+    - name: Install xorg
+      pacman:
+          name:
+              - brightnessctl
+              - gnu-free-fonts
+              - xorg-server
+              - xf86-video-intel
+              - xorg-xbacklight
+              - xorg-xinit
+              - xorg-xinput
+              - xorg-xkill
+              - xorg-xrandr
+              - xorg-xsetroot
+          state: present
+          update_cache: yes
+      become: true

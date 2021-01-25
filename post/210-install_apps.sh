@@ -10,30 +10,28 @@ sleep 5s
 echo "----------------------------------------------------------------------"
 echo "     Installing apps..."
 echo "----------------------------------------------------------------------"
-yay -Syyuu --needed --noconfirm `sed -e '/^#/d' apps.txt`
-
-
+yay -Syyuu --needed --noconfirm $(sed -e '/^#/d' apps.txt)
 
 if [ -f /usr/bin/variety ]; then
 	sed -i 's/icon = Light/icon = None/g' ~/.config/variety/variety.conf
 fi
 
 if [ -f /usr/bin/tlp ]; then
-  sudo systemctl enable tlp.service
+	sudo systemctl enable tlp.service
 fi
 
 if [ -f /usr/bin/tlp ]; then
-  sudo systemctl enable autorandr
+	sudo systemctl enable autorandr
 fi
 
 if [ -f /usr/bin/laptop_mode ]; then
-  sudo systemctl enable laptop-mode.service
-  echo "#!/usr/bin/env bash
+	sudo systemctl enable laptop-mode.service
+	echo "#!/usr/bin/env bash
 
 light -T 0.4" | sudo tee /etc/laptop-mode/batt-start/brightness.sh
-  sudo chmod +x /etc/laptop-mode/batt-start/brightness.sh
-  echo "#!/usr/bin/env bash
+	sudo chmod +x /etc/laptop-mode/batt-start/brightness.sh
+	echo "#!/usr/bin/env bash
 
 light -S 100" | sudo tee /etc/laptop-mode/batt-stop/brightness.sh
-  sudo chmod +x /etc/laptop-mode/batt-stop/brightness.sh
+	sudo chmod +x /etc/laptop-mode/batt-stop/brightness.sh
 fi
