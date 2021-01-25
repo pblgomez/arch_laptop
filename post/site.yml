@@ -1,15 +1,15 @@
 ---
-- hosts: 127.0.0.1
+    - hosts: 127.0.0.1
     #- hosts: vm
-  connection: local
-  roles:
-    - yay
-    - sway
-    - zsh
+      connection: local
+      roles:
+          - yay
+          - sway
+          - zsh
     # - i3wm
     # - bspwm
     # - nvidia
-    - apps
+          - apps
     # - vscodium_extensions
     # - firefox
     # - laptop
