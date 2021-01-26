@@ -1,18 +1,17 @@
 ---
-    - name: Install sway
-      become: true
-      package:
-          name:
-              - sway
-              - xorg-server-xwayland
-              - alacritty
-              - mako
-      #- dmenu
-      #- picom-tryone-git
-          state: present
+- name: Install sway
+  become: true
+  package:
+    name:
+      - sway
+      - xorg-server-xwayland
+      - alacritty
+      - mako
+    # - dmenu
+    # - picom-tryone-git
+    state: present
+# - include_role:
+# name: xorg
 
-#- include_role:
-    #name: xorg
-
-#- include_role:
-    #name: sxhkd
+# - include_role:
+# name: sxhkd

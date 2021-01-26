@@ -1,170 +1,170 @@
 ---
-    - name: Create user aur_builder
-      become: true
-      user:
-          name: aur_builder
-          group: wheel
-    - name: give aur_builder sudo access
-      become: true
-      lineinfile:
-          path: /etc/sudoers.d/11-install-aur_builder
-          line: 'aur_builder ALL=(ALL) NOPASSWD: /usr/bin/pacman'
-          create: yes
-          validate: visudo -cf %s
+- name: Create user aur_builder
+  become: true
+  user:
+    name: aur_builder
+    group: wheel
+- name: give aur_builder sudo access
+  become: true
+  lineinfile:
+    path: /etc/sudoers.d/11-install-aur_builder
+    line: "aur_builder ALL=(ALL) NOPASSWD: /usr/bin/pacman"
+    create: true
+    validate: visudo -cf %s
 
-    - name: add multilib
-      become: true
-      lineinfile:
-          dest: /etc/pacman.conf
-          state: present
-          line: '[multilib]'
-          regexp: ^\[multilib\]
-          insertafter: ^#\[multilib\]
+- name: add multilib
+  become: true
+  lineinfile:
+    dest: /etc/pacman.conf
+    state: present
+    line: "[multilib]"
+    regexp: ^\[multilib\]
+    insertafter: ^#\[multilib\]
 
-    - name: add multilib (cont)
-      become: true
-      lineinfile:
-          dest: /etc/pacman.conf
-          state: present
-          line: Include = /etc/pacman.d/mirrorlist
-          insertafter: ^\[multilib\]
-          regexp: Include = /etc/pacman.d/mirrorlist
+- name: add multilib (cont)
+  become: true
+  lineinfile:
+    dest: /etc/pacman.conf
+    state: present
+    line: Include = /etc/pacman.d/mirrorlist
+    insertafter: ^\[multilib\]
+    regexp: Include = /etc/pacman.d/mirrorlist
 
-    - name: Add snap-pac-grub keys
-      become: true
-      become_user: aur_builder
-      command: gpg --keyserver hkps://keyserver.ubuntu.com --recv-keys EB4F9E5A60D32232BB52150C12C87A28FEAC6B20
+- name: Add snap-pac-grub keys
+  become: true
+  become_user: aur_builder
+  command: gpg --keyserver hkps://keyserver.ubuntu.com --recv-keys EB4F9E5A60D32232BB52150C12C87A28FEAC6B20
 
-    - name: Run the equivalent of "pacman -Sy" as a separate step
-      become: true
-      community.general.pacman:
-          update_cache: yes
+- name: Run the equivalent of "pacman -Sy" as a separate step
+  become: true
+  community.general.pacman:
+    update_cache: true
 
-    - name: Install apps
-      become: true
-      become_user: aur_builder
-      aur:
-          name:
-    # System apps
-#     - alacritty
-              - autorandr
-              - blueman
-              - borgmatic
-              - brave-bin
-              - clang
-              - clipmenu
-              - cronie
-              - cryfs
-              - dmenu
-              - exa
-              - feh
-              - flatpak
-              - git
-              - htop
-              - imagemagick
-              - kdeconnect
-              - kitty
-              - lf
-              - lxsession
-              - man
-              - neovim
-              - openssh
-              - pcmanfm-gtk3
-              - pdftk
-              - redshift
-              - scrot
-              - snapd
-              - snapper
-              - snap-pac
-              - snap-pac-grub
-              - sshfs
-              - sshpass
-              - tldr
-              - udiskie
-              - unzip
-              - wget
-              - wireguard-tools
-              - xbanish
-              - xidlehook
-              - xsecurelock
-              - xss-lock
-              - yadm
-              - zsh
-              - zsh-autosuggestions
-              - zsh-completions
-              - zsh-history-substring-search
-              - zsh-syntax-highlighting
-    # Fonts
-              - awesome-terminal-fonts
-              - otf-font-awesome
-              - ttf-consolas-ligaturized
-    # Multimedia
-              - alsa-utils
-              - kdenlive
-              - mpv
-              - pulseaudio
-              - volumeicon
-              - youtube-dl
-    # Internet
-              - firefox
-              - nmap
-              - telegram-desktop
-    # Utilities
-              - bitwarden-bin
-    # Docs
-              - joplin-appimage
-              - libreoffice-fresh
-              - vscodium-bin
-              - zathura
-              - zathura-pdf-poppler
-    # Crypto
-              - ledger-live-bin
-              - ledger-udev
-              - neon-wallet-bin
-          state: present
+- name: Install apps
+  become: true
+  become_user: aur_builder
+  aur:
+    name:
+      # System apps
+      #     - alacritty
+      - autorandr
+      - blueman
+      - borgmatic
+      - brave-bin
+      - clang
+      - clipmenu
+      - cronie
+      - cryfs
+      - dmenu
+      - exa
+      - feh
+      - flatpak
+      - git
+      - htop
+      - imagemagick
+      - kdeconnect
+      - kitty
+      - lf
+      - lxsession
+      - man
+      - neovim
+      - openssh
+      - pcmanfm-gtk3
+      - pdftk
+      - redshift
+      - scrot
+      - snapd
+      - snapper
+      - snap-pac
+      - snap-pac-grub
+      - sshfs
+      - sshpass
+      - tldr
+      - udiskie
+      - unzip
+      - wget
+      - wireguard-tools
+      - xbanish
+      - xidlehook
+      - xsecurelock
+      - xss-lock
+      - yadm
+      - zsh
+      - zsh-autosuggestions
+      - zsh-completions
+      - zsh-history-substring-search
+      - zsh-syntax-highlighting
+      # Fonts
+      - awesome-terminal-fonts
+      - otf-font-awesome
+      - ttf-consolas-ligaturized
+      # Multimedia
+      - alsa-utils
+      - kdenlive
+      - mpv
+      - pulseaudio
+      - volumeicon
+      - youtube-dl
+      # Internet
+      - firefox
+      - nmap
+      - telegram-desktop
+      # Utilities
+      - bitwarden-bin
+      # Docs
+      - joplin-appimage
+      - libreoffice-fresh
+      - vscodium-bin
+      - zathura
+      - zathura-pdf-poppler
+      # Crypto
+      - ledger-live-bin
+      - ledger-udev
+      - neon-wallet-bin
+    state: present
 
-    - name: Install from flatpak
-      become: true
-      community.general.flatpak:
-          name: com.spotify.Client
-          state: present
+- name: Install from flatpak
+  become: true
+  community.general.flatpak:
+    name: com.spotify.Client
+    state: present
 
-    - name: Install DevOps apps
-      become: true
-      become_user: aur_builder
-      aur:
-          name:
-              - ansible
-              - docker
-              - docker-compose
-              - kind-bin
-              - kubectl
-              - terraform
-              - terraform-lsp-bin
-              - vagrant
-              - virtualbox
-              - virtualbox-ext-oracle
-              - virtualbox-host-dkms
+- name: Install DevOps apps
+  become: true
+  become_user: aur_builder
+  aur:
+    name:
+      - ansible
+      - docker
+      - docker-compose
+      - kind-bin
+      - kubectl
+      - terraform
+      - terraform-lsp-bin
+      - vagrant
+      - virtualbox
+      - virtualbox-ext-oracle
+      - virtualbox-host-dkms
 
-    - name: add user to docker group
-      become: true
-      user:
-          name: "{{ lookup('env', 'USER') }}"
-          groups:
-              - '{{ item }}'
-          append: true
-      with_items:
-          - docker
-          - vboxusers
+- name: add user to docker group
+  become: true
+  user:
+    name: "{{ lookup('env', 'USER') }}"
+    groups:
+      - "{{ item }}"
+    append: true
+  with_items:
+    - docker
+    - vboxusers
 
-    - name: Enable services
-      become: true
-      systemd:
-          name: '{{ item }}'
-          state: started
-          enabled: yes
-      with_items:
-          - autorandr
-          - bluetooth
-          - snapd
-          - docker
+- name: Enable services
+  become: true
+  systemd:
+    name: "{{ item }}"
+    state: started
+    enabled: true
+  with_items:
+    - autorandr
+    - bluetooth
+    - snapd
+    - docker

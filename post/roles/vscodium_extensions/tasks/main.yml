@@ -1,7 +1,7 @@
 ---
-    - name: Install VSCodium extensions
-      shell: vscodium --install-extension {{ item }}
-      loop:
-          - jaspernorth.vscode-pigments
+- name: Install VSCodium extensions
+  shell: vscodium --install-extension {{ item }}
+  loop:
+    - jaspernorth.vscode-pigments
 #   - liximomo.sftp
 #   - platformio.platform-ide
