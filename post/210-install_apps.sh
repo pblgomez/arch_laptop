@@ -10,7 +10,7 @@ sleep 5s
 echo "----------------------------------------------------------------------"
 echo "     Installing apps..."
 echo "----------------------------------------------------------------------"
-yay -Syyuu --needed --noconfirm $(sed -e '/^#/d' apps.txt)
+yay -Syyuu --needed --noconfirm "$(sed -e '/^#/d' apps.txt)"
 
 if [ -f /usr/bin/variety ]; then
 	sed -i 's/icon = Light/icon = None/g' ~/.config/variety/variety.conf

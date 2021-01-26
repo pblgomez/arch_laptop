@@ -1,12 +1,28 @@
 #!/usr/bin/env bash
+#
+#    _ \  |      |
+#   |   | __ \   |  Pablo Gómez
+#   ___/  |   |  |  http://www.gitlab.com/pblgomez
+#  _|    _.__/  _|
+#
+# Description:
+# shellcheck source=variables.sh
 set -e
 
 ##
 ## SCRIPT DE INSTALACION DE ARCHLINUX CON LUKS+BTRFS
 ##
 
-DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
-source "$DIR"/variables.sh
+ThisDir=$(dirname "$(readlink -f -- "$0")")
+declare DRIVE
+declare distro
+declare encryption
+declare swap
+declare swap_size
+declare name_swap
+declare name_system
+declare root_vol_name
+source "$ThisDir"/variables.sh
 
 echo "############################################################"
 echo "# Clearing disk and make partitions"
@@ -110,9 +126,9 @@ echo "############################################################"
 echo "# Finished step1, now to step2"
 echo "# execute /root/step2.sh"
 echo "############################################################"
-cp "$DIR"/step2.sh /mnt/root/.
-cp "$DIR"/variables.sh /mnt/root/.
-cp -r "$DIR"/post /mnt/var/tmp/.
+cp "$ThisDir"/step2.sh /mnt/root/.
+cp "$ThisDir"/variables.sh /mnt/root/.
+cp -r "$ThisDir"/post /mnt/var/tmp/.
 chmod a+rwx -R /mnt/var/tmp/post
 arch-chroot /mnt
 

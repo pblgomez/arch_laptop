@@ -1,4 +1,5 @@
 #!/usr/bin/env sh
+# shellcheck disable=SC2034
 
 ### Variables
 # lsblk -o +LABEL,PARTLABEL,UUID,PARTUUID                                   # To check what device to install to

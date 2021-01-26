@@ -4,7 +4,7 @@ set -e
 ThisDir="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 if hash vscodium 2>/dev/null; then
 	while IFS= read -r package; do
-		if ls "$HOME"/.vscode-oss/extensions/$package* 1>/dev/null 2>&1; then
+		if ls "$HOME"/.vscode-oss/extensions/"$package"* 1>/dev/null 2>&1; then
 			echo "Already installed $package"
 		else
 			echo "Installing $package"

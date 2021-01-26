@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
+# shellcheck source=variables.sh
 set -e
+
+declare kernel
 
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 source "$DIR"/variables.sh
@@ -8,8 +11,9 @@ echo "############################################################"
 echo "# Create user"
 echo "############################################################"
 pacman -Syu --noconfirm zsh
-read -p "Enter username: " username
-useradd -G sys,network,scanner,power,rfkill,users,video,uucp,storage,optical,lp,audio,wheel -s $(which zsh) -m "$username"
+echo -n "Enter username: "
+read -r username
+useradd -G sys,network,scanner,power,rfkill,users,video,uucp,storage,optical,lp,audio,wheel -s "$(which zsh)" -m "$username"
 echo "Enter password:"
 passwd "$username"
 # Give sudoers permission
@@ -49,9 +53,9 @@ echo "############################################################"
 echo "# Hostname and hosts and network"
 echo "############################################################"
 echo "$set_hostname" >/etc/hostname
-echo "127.0.0.1       localhost\n
-::1       localhost\n
-127.0.1.1     $set_hostname.localdomain   $set_hostname" >>/etc/hosts
+printf "127.0.0.1       localhost
+::1       localhost
+127.0.1.1     %s.localdomain   %s" "$(set_hostname)" "$(set_hostname)" >>/etc/hosts
 systemctl enable NetworkManager
 #systemctl enable dhcpcd
 systemctl enable sshd
@@ -60,7 +64,10 @@ systemctl enable ntpd
 echo "############################################################"
 echo "# makepkg.conf"
 echo "############################################################"
-sed 's/#MAKEFLAGS.*/MAKEFLAGS="-j$(nproc)"/' /etc/makepkg.conf
+var=$(nproc)
+var=$((var + 1))
+sed -i 's/.*MAKEFLAGS=.*/MAKEFLAGS="-j'$var'"/g' /etc/makepkg.conf
+sed -i 's/COMPRESSXZ=.*/COMPRESSXZ=(xz -c -T '$var' -z -)/g' /etc/makepkg.conf
 
 echo "############################################################"
 echo "# Bootloader"
