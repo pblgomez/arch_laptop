@@ -14,11 +14,6 @@ repos:
       - id: shellcheck
         args: ['-x']
       - id: shfmt
-      #   - repo: https://github.com/jumanjihouse/pre-commit-hook-yamlfmt
-      #     rev: 0.1.0
-      #     hooks:
-      #         - id: yamlfmt
-
 
   - repo: https://github.com/adrienverge/yamllint.git
     rev: v1.25.0
