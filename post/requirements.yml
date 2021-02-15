@@ -1,6 +1,8 @@
 ---
 # ansible-galaxy install -r requirements.yml
 roles:
-    - jpedrodelacerda.yay
-    - kewlfft.aur
-    - alzadude.firefox
+  - jpedrodelacerda.yay
+  - kewlfft.aur
+  - alzadude.firefox
+collections:
+  - community.libvirt

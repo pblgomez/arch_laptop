@@ -6,10 +6,11 @@
     - paru
     - sway
     - zsh
-    # - i3wm
-    # - bspwm
-    # - nvidia
+    - i3wm
+    - bspwm
+    - nvidia
     - apps
-# - vscodium_extensions
-# - firefox
-# - laptop
+    - vscodium_extensions
+    - firefox
+    - laptop
+    - libvirtd
