@@ -26,7 +26,7 @@ echo "# Install programs"
 echo "############################################################"
 pacman -Syu --noconfirm \
 	btrfs-progs ntp \
-	"$kernel" "$kernel"-headers linux-firmware intel-ucode dkms \
+	"$kernel" "$kernel"-headers linux-firmware dkms \
 	neovim openssh git python \
 	wpa_supplicant networkmanager \
 	efibootmgr

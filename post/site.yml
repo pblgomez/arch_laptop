@@ -3,14 +3,15 @@
   # - hosts: vm
   connection: local
   roles:
-    - paru
-    - sway
-    - zsh
-    - i3wm
-    - bspwm
-    - nvidia
     - apps
-    - vscodium_extensions
+    - bspwm
+    - cpu
     - firefox
+    - i3wm
     - laptop
     - libvirtd
+    - nvidia
+    - paru
+    - sway
+    - vscodium_extensions
+    - zsh
