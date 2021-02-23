@@ -1,13 +1,13 @@
 ---
 - name: Install bspwm
+  become: true
+  become_user: aur_builder
   aur:
     name:
       - bspwm
       - dmenu
       - picom-tryone-git
     state: present
-    update_cache: true
-  become: true
 
 - include_role:
     name: xorg

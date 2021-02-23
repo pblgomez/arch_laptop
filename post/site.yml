@@ -3,6 +3,7 @@
   # - hosts: vm
   connection: local
   roles:
+    - kewlfft.aur
     - apps
     - bspwm
     - cpu

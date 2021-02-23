@@ -25,6 +25,7 @@
   become: true
 
 - name: add user to libvirt group
+  become: true
   user:
     name: "{{ lookup('env', 'USER') }}"
     groups:
@@ -32,5 +33,6 @@
     append: true
 
 - community.libvirt.virt_net:
-    autostart: yes
-    name: default
+  become: true
+    #autostart: true
+    #name: default

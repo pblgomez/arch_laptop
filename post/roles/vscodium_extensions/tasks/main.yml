@@ -3,5 +3,7 @@
   shell: vscodium --install-extension {{ item }}
   loop:
     - jaspernorth.vscode-pigments
-#   - liximomo.sftp
-#   - platformio.platform-ide
+    - keesschollaart.vscode-home-assistant
+    - platformio.platformio-ide
+    - dracula-theme.theme-dracula
+    - liximomo.sftp

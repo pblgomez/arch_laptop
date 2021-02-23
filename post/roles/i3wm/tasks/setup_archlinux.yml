@@ -8,7 +8,6 @@
       - picom-tryone-git
       - i3-gaps
     state: present
-    update_cache: true
   become: true
 
 - include_role:

@@ -7,6 +7,8 @@
 #
 # Description: Post Instalation of Archlinux
 
-sudo pacman -Sy ansible --noconfirm
-ansible-galaxy install -r requirements.yml
+ThisDir=$(dirname "$(readlink -f -- "$0")")
+
+sudo pacman -Sy ansible --noconfirm --needed
+ansible-galaxy install -r "$ThisDir"/requirements.yml
 ansible-playbook site.yml -K
