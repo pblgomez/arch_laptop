@@ -34,5 +34,7 @@
 
 - community.libvirt.virt_net:
   become: true
+  name: default
+  autostart: true
     #autostart: true
     #name: default
