@@ -31,10 +31,8 @@
     groups:
       - libvirt
     append: true
+  tags: libvirtd
 
 - community.libvirt.virt_net:
-  become: true
-  name: default
-  autostart: true
-    #autostart: true
-    #name: default
+    autostart: yes
+    name: default
