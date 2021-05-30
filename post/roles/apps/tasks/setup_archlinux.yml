@@ -47,7 +47,6 @@
       - blueman
       #- borgmatic
       #- brave-bin
-      - cfdisk
       #- clang
       #- clipmenu
       - cronie
