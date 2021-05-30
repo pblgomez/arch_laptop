@@ -3,6 +3,7 @@
   package:
     name: zsh
     state: present
+  tags: zsh
 
 - name: Configure XDG for zsh
   become: true
@@ -11,3 +12,10 @@
     content: |
           export XDG_CONFIG_HOME="$HOME/.config"
           export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+  tags: zsh
+
+- name: clone pure theme
+  ansible.builtin.git:
+    repo: 'https://github.com/sindresorhus/pure.git'
+    dest: '/home/{{ ansible_user }}/.config/zsh/pure'
+  tags: zsh

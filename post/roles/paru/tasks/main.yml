@@ -16,9 +16,6 @@
   ignore_errors: true
   register: paru
 
-- debug:
-    var: paru
-
 - name: Clone paru repository
   git:
     repo: https://aur.archlinux.org/paru.git

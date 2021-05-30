@@ -1,17 +1,19 @@
 ---
 - name: Install xorg
-  pacman:
+  package:
     name:
-      - brightnessctl
+      #- brightnessctl
       - gnu-free-fonts
-      - xorg-server
+      - sxhkd
       - xf86-video-intel
+      - xorg-server
       - xorg-xbacklight
       - xorg-xinit
       - xorg-xinput
       - xorg-xkill
       - xorg-xrandr
       - xorg-xsetroot
+      - xwallpaper
     state: present
     update_cache: true
   become: true

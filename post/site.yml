@@ -1,18 +1,39 @@
 ---
-- hosts: 127.0.0.1
-  # - hosts: vm
-  connection: local
+# - hosts: 127.0.0.1
+- hosts: vm
+  # connection: local
+  tasks:
+    - name: Ensure ansible user accepts the SSH key
+      authorized_key:
+        user: '{{ ansible_user }}'
+        key: "{{ lookup('file', '~/.ssh/id_ed25519.pub') }}"
+        state: present
+
+    - name: Disable root login
+      become: true
+      user:
+        name: root
+        password: '!'
+
+    - name: Git checkout
+      ansible.builtin.git:
+        repo: 'https://git.suckless.org/dwm'
+        dest: '/home/{{ ansible_user }}/dwm'
+        #version: release-0.22
   roles:
     - kewlfft.aur
-    - apps
-    - bspwm
-    - cpu
-    - firefox
-    - i3wm
-    - laptop
-    - libvirtd
-    - nvidia
     - paru
-    - sway
-    - vscodium_extensions
+    - cpu
     - zsh
+    - yadm
+    - xorg
+    - dwm
+    - apps
+    #- bspwm
+    #- firefox
+    #- i3wm
+    #- laptop
+    #- libvirtd
+    #- nvidia
+    #- sway
+    #- vscodium_extensions

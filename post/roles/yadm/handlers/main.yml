@@ -1,0 +1,7 @@
+---
+- name: restart cron
+  become: true
+  service:
+    name: cronie
+    state: restarted
+    daemon_reload: yes

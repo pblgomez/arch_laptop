@@ -1,12 +1,80 @@
 ---
-- name: install Intel microcode
-  pacman:
-    name: intel-ucode
-  when: "'GenuineIntel' in ansible_processor"
-  become: true
+- name: get CPU vendor
+  set_fact:
+    cpu_vendor: 'intel'
+  when: ansible_processor | lower is search("intel")
+  tags:
+    - microcode
+    - vendor
 
-- name: install AMD microcode
-  pacman:
-    name: amd-ucode
-  when: "'AuthenticAMD' in ansible_processor"
+- name: get CPU vendor
+  set_fact:
+    cpu_vendor: 'amd'
+  when: ansible_processor | lower is search("amd")
+  tags:
+    - microcode
+    - vendor
+
+- name: get CPU vendor
+  set_fact:
+    cpu_vendor: 'arm'
+  when: ansible_processor | lower is search("arm")
+  tags:
+    - microcode
+    - vendor
+
+- name: add related package(s)
   become: true
+  package:
+    name: intel-ucode
+    state: present
+  when: 
+    - ansible_os_family == 'Archlinux'
+    - ansible_virtualization_role == 'host'
+    - cpu_vendor == 'intel'
+  tags:
+    - microcode
+    - package
+    - add
+
+- name: add related package(s)
+  become: true
+  package:
+    name: intel-microcode
+    state: present
+  when: 
+    - ansible_os_family == 'Debian'
+    - ansible_virtualization_role == 'host'
+    - cpu_vendor == 'intel'
+  tags:
+    - microcode
+    - package
+    - add
+
+- name: add related package(s)
+  become: true
+  package:
+    name: amd-ucode
+    state: present
+  when:
+    - ansible_os_family == 'Archlinux'
+    - ansible_virtualization_role == 'host'
+    - cpu_vendor == 'amd'
+  tags:
+    - microcode
+    - package
+    - add
+
+- name: add related package(s)
+  become: true
+  package:
+    name: amd64-microcode
+    state: present
+  when:
+    - ansible_os_family == 'Debian'
+    - ansible_virtualization_role == 'host'
+    - cpu_vendor == 'amd'
+  tags:
+    - microcode
+    - package
+    - add
