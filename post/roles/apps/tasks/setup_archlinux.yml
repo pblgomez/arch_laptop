@@ -51,7 +51,6 @@
       #- clipmenu
       - cronie
       - cryfs
-      #- dmenu
       - exa
       #- feh
       - flatpak
@@ -59,10 +58,9 @@
       - htop
       #- imagemagick
       #- kdeconnect
-      #- kitty
       #- lf
       #- lxsession
-      #- man
+      - man
       - neovim
       - openssh
       - os-prober
@@ -98,6 +96,7 @@
       #- awesome-terminal-fonts
       #- otf-font-awesome
       #- ttf-consolas-ligaturized
+      - ttf-firacode
       ## Multimedia
       #- alsa-utils
       #- kdenlive
