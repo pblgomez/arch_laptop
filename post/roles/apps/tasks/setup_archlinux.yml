@@ -113,6 +113,7 @@
       #- telegram-desktop
       ## Utilities
       - bitwarden-bin
+      - jq
       ## Docs
       #- joplin-appimage
       #- libreoffice-fresh
