@@ -53,6 +53,7 @@
       #- feh
       - flatpak
       - git
+      - git-crypt
       - greenclip
       - htop
       #- imagemagick
