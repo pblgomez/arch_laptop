@@ -1,29 +1,34 @@
 ---
-- name: Get username
-  shell: who | awk '{print $1}'
-  changed_when: false
-  become: false
-  register: whoami
+- name: Install tlp
+  package:
+    name: tlp
+    state: present
   tags: laptop
-- name: whoami
-  debug:
-    var: whoami
-  tags: laptop
-
-- name: brightness on ac
-  become: true
-  copy:
-    dest: /etc/udev/rules.d/98-backlight.rules
-    content: |
-      # Adjust screen brightness according to power state
-      # 1st rule for when on AC
-      ACTION=="change", SUBSYSTEM=="power_supply", ATTR{type}=="Mains", ATTR{online}=="1", \
-      ENV{DISPLAY}=":0", ENV{XAUTHORITY}="/home/{{ whoami.stdout }}/.Xauthority", RUN+="/usr/bin/brightnessctl s 90%"
-      # 2nd rule for when on battery
-      ACTION=="change", SUBSYSTEM=="power_supply", ATTR{type}=="Mains", ATTR{online}=="0", \
-      ENV{DISPLAY}=":0", ENV{XAUTHORITY}="/home/{{ whoami.stdout }}/.Xauthority", RUN+="/usr/bin/brightnessctl s 10%"
-  tags: laptop
-  notify: Reload udev rules
+# - name: Get username
+#   shell: who | awk '{print $1}'
+#   changed_when: false
+#   become: false
+#   register: whoami
+#   tags: laptop
+# - name: whoami
+#   debug:
+#     var: whoami
+#   tags: laptop
+# 
+# - name: brightness on ac
+#   become: true
+#   copy:
+#     dest: /etc/udev/rules.d/98-backlight.rules
+#     content: |
+#       # Adjust screen brightness according to power state
+#       # 1st rule for when on AC
+#       ACTION=="change", SUBSYSTEM=="power_supply", ATTR{type}=="Mains", ATTR{online}=="1", \
+#       ENV{DISPLAY}=":0", ENV{XAUTHORITY}="/home/{{ whoami.stdout }}/.Xauthority", RUN+="/usr/bin/brightnessctl s 90%"
+#       # 2nd rule for when on battery
+#       ACTION=="change", SUBSYSTEM=="power_supply", ATTR{type}=="Mains", ATTR{online}=="0", \
+#       ENV{DISPLAY}=":0", ENV{XAUTHORITY}="/home/{{ whoami.stdout }}/.Xauthority", RUN+="/usr/bin/brightnessctl s 10%"
+#   tags: laptop
+#   notify: Reload udev rules
 # - name: Suspend on idle
 # become: true
 # lineinfile:

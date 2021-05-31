@@ -47,14 +47,13 @@
       - blueman
       #- borgmatic
       #- brave-bin
-      #- clang
-      #- clipmenu
       - cronie
       - cryfs
       - exa
       #- feh
       - flatpak
       - git
+      - greenclip
       - htop
       #- imagemagick
       #- kdeconnect
@@ -86,6 +85,7 @@
       #- xsecurelock
       #- xss-lock
       - yadm
+      - yarn
       - zsh
       - zsh-autosuggestions
       - zsh-completions
@@ -97,15 +97,16 @@
       ## Fonts
       - awesome-terminal-fonts
       - otf-font-awesome
-      #- ttf-consolas-ligaturized
+      - ttf-consolas-ligaturized
       - ttf-firacode
       ## Multimedia
       #- alsa-utils
       #- kdenlive
       - mpv
-      #- pulseaudio
-      #- volumeicon
+      - pipewire
+      - pipewire-pulse
       - youtube-dl
+      - pavucontrol
       ## Internet
       - chromium
       - firefox
@@ -114,12 +115,13 @@
       ## Utilities
       - bitwarden-bin
       - jq
+      - lxappearance
       ## Docs
-      #- joplin-appimage
+      - joplin-appimage
       #- libreoffice-fresh
       #- vscodium-bin
-      #- zathura
-      #- zathura-pdf-poppler
+      - zathura
+      - zathura-pdf-poppler
       ## Crypto
       #- ledger-live-bin
       #- ledger-udev

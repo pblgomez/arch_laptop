@@ -38,3 +38,10 @@
   file:
     path: "{{ ansible_env.HOME }}/paru"
     state: absent
+
+- name: Configure paru
+  become: true
+  replace:
+    path: /etc/paru.conf
+    regexp: '#BottomUp'
+    replace: 'BottomUp'
