@@ -1,13 +1,13 @@
 ---
-# - hosts: 127.0.0.1
+#- hosts: 127.0.0.1
 - hosts: vm
-  # connection: local
+  #connection: local
   tasks:
-    - name: Ensure ansible user accepts the SSH key
-      authorized_key:
-        user: '{{ ansible_user }}'
-        key: "{{ lookup('file', '~/.ssh/id_ed25519.pub') }}"
-        state: present
+    #- name: Ensure ansible user accepts the SSH key
+      #authorized_key:
+        #user: '{{ ansible_user }}'
+        #key: "{{ lookup('file', '~/.ssh/id_ed25519.pub') }}"
+        #state: present
 
     - name: Disable root login
       become: true
@@ -15,11 +15,6 @@
         name: root
         password: '!'
 
-    - name: Git checkout
-      ansible.builtin.git:
-        repo: 'https://git.suckless.org/dwm'
-        dest: '/home/{{ ansible_user }}/dwm'
-        #version: release-0.22
   roles:
     - kewlfft.aur
     - paru

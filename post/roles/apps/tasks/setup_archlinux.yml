@@ -73,15 +73,15 @@
       #- snapper
       #- snap-pac
       #- snap-pac-grub
-      #- sshfs
-      #- sshpass
+      - sshfs
+      - sshpass
       - sxiv
       - tldr
       #- udiskie
       #- unzip
       - wget
       #- wireguard-tools
-      #- xbanish
+      - xbanish
       #- xidlehook
       #- xsecurelock
       #- xss-lock
@@ -92,19 +92,22 @@
       - zsh-history-substring-search
       - zsh-syntax-highlighting
 
+      ## Social
+      - slack-desktop
       ## Fonts
-      #- awesome-terminal-fonts
-      #- otf-font-awesome
+      - awesome-terminal-fonts
+      - otf-font-awesome
       #- ttf-consolas-ligaturized
       - ttf-firacode
       ## Multimedia
       #- alsa-utils
       #- kdenlive
-      #- mpv
+      - mpv
       #- pulseaudio
       #- volumeicon
-      #- youtube-dl
+      - youtube-dl
       ## Internet
+      - chromium
       - firefox
       #- nmap
       #- telegram-desktop
@@ -128,17 +131,17 @@
     #name: com.spotify.Client
     #state: present
 
-#- name: Install DevOps apps
-  #become: true
-  #become_user: aur_builder
-  #aur:
-    #name:
-      #- ansible
+- name: Install DevOps apps
+  become: true
+  become_user: aur_builder
+  aur:
+    name:
+      - ansible
       #- docker
       #- docker-compose
       #- kind-bin
-      #- kubectl
-      #- terraform
+      - kubectl
+      - terraform
       #- terraform-lsp-bin
       #- vagrant
       #- virtualbox
