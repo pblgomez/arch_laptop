@@ -143,9 +143,9 @@
   aur:
     name:
       - ansible
-      #- docker
-      #- docker-compose
-      #- kind-bin
+      - docker
+      - docker-compose
+      - kind-bin
       - kubectl
       - terraform
       #- terraform-lsp-bin
@@ -154,15 +154,15 @@
       #- virtualbox-ext-oracle
       #- virtualbox-host-dkms
 
-#- name: add user to docker group
-  #become: true
-  #user:
-    #name: "{{ lookup('env', 'USER') }}"
-    #groups:
-      #- "{{ item }}"
-    #append: true
-  #with_items:
-    #- docker
+- name: add user to docker group
+  become: true
+  user:
+    name: "{{ lookup('env', 'USER') }}"
+    groups:
+      - "{{ item }}"
+    append: true
+  with_items:
+    - docker
     #- vboxusers
 
 - name: Enable services
