@@ -148,6 +148,7 @@
       - docker-compose
       - kind-bin
       - kubectl
+      - kubie
       - terraform
       - terraform-docs-bin
       - flake8
