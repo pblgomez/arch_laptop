@@ -151,7 +151,6 @@
       - terraform
       - terraform-docs-bin
       - flake8
-      - mdl
       - tflint-bin
       #- terraform-lsp-bin
       #- vagrant
@@ -180,4 +179,4 @@
     - autorandr
     - bluetooth
     - snapd
-    #- docker
+    - docker

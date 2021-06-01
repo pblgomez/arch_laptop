@@ -4,10 +4,3 @@
     repo: git@github.com:pblgomez/dwm.git
     dest: /home/{{ ansible_user }}/.local/share/dwm
   tags: dwm
-
-- name: Install dwmbar
-  become: true
-  aur:
-    name: dwmbar-git
-    state: present
-  tags: dwm
