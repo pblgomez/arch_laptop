@@ -149,6 +149,7 @@
       - kind-bin
       - kubectl
       - kubie
+      - lens-bin
       - terraform
       - terraform-docs-bin
       - flake8
