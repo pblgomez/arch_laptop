@@ -148,6 +148,9 @@
       - kind-bin
       - kubectl
       - terraform
+      - flake8
+      - mdl
+      - tflint-bin
       #- terraform-lsp-bin
       #- vagrant
       #- virtualbox
