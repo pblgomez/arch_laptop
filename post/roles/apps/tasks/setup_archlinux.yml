@@ -143,6 +143,7 @@
   aur:
     name:
       - ansible
+      - aws-cli
       - docker
       - docker-compose
       - kind-bin
