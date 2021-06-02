@@ -68,7 +68,7 @@
       #- pdftk
       #- redshift
       - rsync
-      #- scrot
+      - scrot
       - snapd
       #- snapper
       #- snap-pac
