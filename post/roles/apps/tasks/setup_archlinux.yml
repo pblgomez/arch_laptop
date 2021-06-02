@@ -146,12 +146,12 @@
       - aws-cli
       - docker
       - docker-compose
+      - github-cli
       - kind-bin
       - kubectl
       - kubie
       - lens-bin
       - terraform
-      - terraform-docs-bin
       - flake8
       - tflint-bin
       #- terraform-lsp-bin
