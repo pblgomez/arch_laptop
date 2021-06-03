@@ -77,8 +77,8 @@
       - sshpass
       - sxiv
       - tldr
-      #- udiskie
-      #- unzip
+      - udiskie
+      - unzip
       - wget
       #- wireguard-tools
       - xbanish
@@ -149,6 +149,7 @@
       - github-cli
       - kind-bin
       - kubectl
+      - helm
       - kubie
       - lens-bin
       - terraform
