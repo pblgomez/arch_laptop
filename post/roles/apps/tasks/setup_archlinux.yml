@@ -46,9 +46,10 @@
       - bat
       - blueman
       #- borgmatic
-      #- brave-bin
+      - brave-bin
       - cronie
       - cryfs
+      - dunst
       - exa
       #- feh
       - flatpak
@@ -57,7 +58,7 @@
       - greenclip
       - htop
       #- imagemagick
-      #- kdeconnect
+      - kdeconnect
       #- lf
       #- lxsession
       - man
@@ -83,6 +84,7 @@
       - wget
       #- wireguard-tools
       - xbanish
+      - xclip
       #- xidlehook
       #- xsecurelock
       #- xss-lock
@@ -96,11 +98,14 @@
 
       ## Social
       - slack-desktop
+      - telegram-desktop
+
       ## Fonts
       - awesome-terminal-fonts
       - otf-font-awesome
       - ttf-consolas-ligaturized
       - ttf-firacode
+        
       ## Multimedia
       #- alsa-utils
       #- kdenlive
@@ -109,15 +114,18 @@
       - pipewire-pulse
       - youtube-dl
       - pavucontrol
+
       ## Internet
       - chromium
       - firefox
       #- nmap
-      #- telegram-desktop
+
       ## Utilities
       - bitwarden-bin
       - jq
       - lxappearance
+      - gopass
+      - rofi-pass
       - python-pre-commit
       - python-pip
       ## Docs
@@ -126,6 +134,7 @@
       #- vscodium-bin
       - zathura
       - zathura-pdf-poppler
+
       ## Crypto
       #- ledger-live-bin
       #- ledger-udev
