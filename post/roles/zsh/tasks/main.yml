@@ -1,21 +1,8 @@
 ---
-- name: Install ZSH
-  package:
-    name: zsh
-    state: present
+- include_tasks: setup_archlinux.yml
+  when: ansible_os_family == 'Archlinux'
   tags: zsh
 
-- name: Configure XDG for zsh
-  become: true
-  copy:
-    dest: /etc/zsh/zshenv
-    content: |
-          export XDG_CONFIG_HOME="$HOME/.config"
-          export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
-  tags: zsh
-
-- name: clone pure theme
-  ansible.builtin.git:
-    repo: 'https://github.com/sindresorhus/pure.git'
-    dest: '/home/{{ ansible_user }}/.config/zsh/pure'
+- include_tasks: setup_debian.yml
+  when: ansible_os_family == 'Debian'
   tags: zsh
