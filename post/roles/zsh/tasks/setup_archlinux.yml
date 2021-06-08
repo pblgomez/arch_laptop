@@ -15,7 +15,8 @@
   tags: zsh
 
 - name: clone pure theme
+  become: true
   ansible.builtin.git:
     repo: 'https://github.com/sindresorhus/pure.git'
-    dest: '/home/{{ ansible_user }}/.config/zsh/pure'
+    dest: "{{ lookup('env','HOME') }}/.config/zsh/pure"
   tags: zsh

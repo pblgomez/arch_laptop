@@ -2,5 +2,5 @@
 - name: git clone dwm (pblgomez)
   ansible.builtin.git:
     repo: git@github.com:pblgomez/dwm.git
-    dest: /home/{{ ansible_user }}/.local/share/dwm
+    dest: "{{ lookup('env','HOME') }}/.local/share/dwm"
   tags: dwm

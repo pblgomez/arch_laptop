@@ -59,7 +59,7 @@
       - htop
       #- imagemagick
       - kdeconnect
-      #- lf
+      - lf
       #- lxsession
       - man
       - neovim
@@ -118,7 +118,7 @@
       ## Internet
       - chromium
       - firefox
-      #- nmap
+      - nmap
 
       ## Utilities
       - bitwarden-bin
@@ -136,16 +136,16 @@
       - zathura-pdf-poppler
 
       ## Crypto
-      #- ledger-live-bin
-      #- ledger-udev
-      #- neon-wallet-bin
+      - ledger-live-bin
+      - ledger-udev
+      - neon-wallet-bin
     state: present
 
-#- name: Install from flatpak
-  #become: true
-  #community.general.flatpak:
-    #name: com.spotify.Client
-    #state: present
+- name: Install from flatpak
+  become: true
+  community.general.flatpak:
+    name: com.spotify.Client
+    state: present
 
 - name: Install DevOps apps
   become: true
@@ -168,9 +168,9 @@
       - tflint-bin
       #- terraform-lsp-bin
       #- vagrant
-      #- virtualbox
-      #- virtualbox-ext-oracle
-      #- virtualbox-host-dkms
+      - virtualbox
+      - virtualbox-ext-oracle
+      - virtualbox-host-dkms
 
 - name: add user to docker group
   become: true
@@ -181,7 +181,7 @@
     append: true
   with_items:
     - docker
-    #- vboxusers
+    - vboxusers
 
 - name: Enable services
   become: true

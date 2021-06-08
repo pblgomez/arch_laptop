@@ -28,7 +28,7 @@
     name: cronie
 
 - name: Cron to keep dotfiles in sync
-  become_user: "{{ ansible_user }}"
+  become_user: "{{ lookup('env','USR') }}"
   cron:
     name: "Keep yadm in sync"
     minute: "*/10"
